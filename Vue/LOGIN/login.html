@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleLog.css?uyty">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <title> Login</title>
+</head>
+<body>
+    <div class="container">
+
+          <div class="formContainer">
+            
+            <div class="sliderSection">
+               <img src="Images_log\Organizing projects-rafiki.png" alt="slideImage" id="img">
+                  <div class="progression">
+                     <i> </i>
+                     <i> </i>
+                     <i> </i> 
+                  </div>
+            </div>
+
+            <div class="formsection">
+                <a href="http://www.univ-bejaia.dz/formation/index.php?lang=fr" class="bt"> 
+                    <img src="Images_log\logo ub sur un visuel  taille moyenne.jpg" id="logo"/>  
+                     </a> 
+              <h1>  Account Login</h1>
+                     <form action="../login.php" method="post" class="form">
+             <div class="inputRow">
+                 <div class="inputIcons">
+                    <i class='bx bxs-user'></i>
+                 </div>
+                 <input type="text" name="UserName" id="Identifiant" placeholder="UserID" required>
+             </div>
+             <div class="inputRow" id="passwd">
+                <div class="inputIcons">
+                   
+                    <i class='bx bxs-lock-open'></i>
+
+                </div>
+                <input type="password" name="password" id="pwd" placeholder="User_Password" required>
+            </div>
+
+               <div class="row">
+                    <div class="col">
+                        <input type="checkbox" name="sauvgarde" id="sauvgarde" >
+                        <label for="sauvgarde"> se souvenir de moi!</label>
+    
+                    </div>
+                    <a href="#" id="forg"> password oublier? </a>
+                  </div>
+                  <div class="btnRow">
+                      <input type="submit" value="connexion" id="loginBtn" class="btn">
+                  </div>
+                  <div class="btnRow" id="singupDiv">
+                      <input type="button" value="S'inscrire" id="signupBtn"  class="btn"> 
+                  </div>
+                </form>
+                  
+                  <div class="btnRow">
+                     
+                      
+                  </div>
+            </div>
+            <a href="#" id="credits"> Created By Heizenberg  </a>
+          </div>
+      
+
+    </div>
+    
+</body>
+</html>

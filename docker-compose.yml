@@ -1,0 +1,29 @@
+services:
+  website:
+    build: .
+    volumes:
+      - .:/var/www/html/
+    ports:
+      - 80:80
+    
+  db:
+    image: mysql  # Utilisation correcte de `image` avec une version explicite
+    volumes:
+      - ./dataBase:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 336699
+      MYSQL_DATABASE: crossword_db
+      MYSQL_USER: crossword 
+      MYSQL_PASSWORD: crossword_password
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 9001:80
+    environment:
+      - PMA_HOST=db  
+      - MYSQL_ROOT_PASSWORD=336699
+      - PMA_PORT=3306
