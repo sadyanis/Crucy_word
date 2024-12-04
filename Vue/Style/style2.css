@@ -55,8 +55,8 @@ li a:hover{
 
 .indices {
     display: grid;
-    grid-template-columns: repeat(11, 50px); /* 10 colonnes + 1 pour les indices */
-    grid-template-rows: repeat(11, 50px); /* 10 lignes + 1 pour les indices */
+    grid-template-columns: repeat(11, 30px); /* 10 colonnes + 1 pour les indices */
+    grid-template-rows: repeat(11, 30px); /* 10 lignes + 1 pour les indices */
     gap: 0;
 }
 

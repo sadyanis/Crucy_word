@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
             <div class="ligne_indices">
                 <div class="case"><?php echo chr(65 + $i); ?></div> <!-- Lettres des lignes -->
                 <?php for ($j = 1; $j <= 10; $j++) { ?>
-                    <div class="case grille_item" id="case_<?php echo $i . "_" . $j; ?>"></div>
+                    <div class="case grille_item" id="case_<?php echo $i . "_" . $j-1; ?>" data-x="<?php echo $i?>" data-y="<?php echo $j-1?>"></div>
                 <?php } ?>
             </div>
         <?php } ?>

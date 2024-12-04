@@ -1,22 +1,7 @@
-<?php include "../../core/Database.php" ;
+<?php include "../../controllers/AuthController.php" ;
 
-if($_SERVER['REQUEST_METHOD']==='POST'){
-  $UserId = htmlspecialchars($_POST['UserName']);
-  $name =    htmlspecialchars($_POST['Name']);
-  $password = htmlspecialchars($_POST['password']);
-  $email = htmlspecialchars($_POST['email']);
-  $role = 'user';
-
-  $db= new Database();
-  $success = $db->createUser($UserId, $name, $password, $email, $role);
-  if($success){
-    header("Location: ../home2.php");
-    exit();
-  }else{
-    $error_massage = "Une erreur est survenue lors de l'inscription";
-  }
-}
-
+$controler = new AuthController();
+$controler->Register();
 ?>
 
 

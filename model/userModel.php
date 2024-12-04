@@ -31,10 +31,15 @@ class User {
 }
 
     // Trouver un utilisateur par son nom d'utilisateur
-    public function findByUsername($username) {
-        $sql = "SELECT * FROM users WHERE username = :username";
+    public function findUser($username,$password) {
+        $sql = "SELECT * FROM user WHERE UserID = :username" ;
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':username' => $username]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $user =  $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if($user && password_verify($password,$user['password'])){
+            return $user;
+        }
+        return false;
     }
 }
