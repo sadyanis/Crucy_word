@@ -32,6 +32,7 @@ class User {
 
     // Trouver un utilisateur par son nom d'utilisateur
     public function findUser($username,$password) {
+        try{
         $sql = "SELECT * FROM user WHERE UserID = :username" ;
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':username' => $username]);
@@ -41,5 +42,20 @@ class User {
             return $user;
         }
         return false;
+    }catch(PDOException $e){
+        die('Erreur'.$e->getMessage());
+    }
+}
+
+    public function getUsers (){
+      try{
+        $sql =  "SELECT UserID from user";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $users;
+      }catch(PDOException $e){
+        die("Erreur Lors du creation des users: ". $e->getMessage());
+       }  
     }
 }

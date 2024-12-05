@@ -9,6 +9,7 @@ nav{
     background-color: rgb(37, 61, 61);
     display: flex;
     justify-content: space-between;
+    position: fixed;
     
 }
 ul {
@@ -47,7 +48,7 @@ li a:hover{
 
 .container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 100vh;
     padding: 20px;
@@ -58,6 +59,7 @@ li a:hover{
     grid-template-columns: repeat(11, 30px); /* 10 colonnes + 1 pour les indices */
     grid-template-rows: repeat(11, 30px); /* 10 lignes + 1 pour les indices */
     gap: 0;
+    margin-left: 40%;
 }
 
 .ligne_indices {
@@ -95,4 +97,32 @@ li a:hover{
 }
 .black{
     background-color: black;
+}
+
+.side_index{
+    height: 100%;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.75);
+    margin-top:7% ;
+
+}
+
+.title{
+    padding: 0;
+    margin: 0;
+    background-color:rgb(37, 61, 61);
+    text-align: center;
+    
+}
+.subcont{
+    
+    flex-wrap: wrap;
+}
+.save{
+    margin-left: 60%;
+   
+
 }

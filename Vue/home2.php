@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/style2.css">
+    <link rel="stylesheet" href="./Style/style2.css">
     <script src="./Script/script.js"defer></script>
     <title>Home</title>
 </head>
 <body>
 <?php require_once(__DIR__.'/menu.php') ?>
 <div class="container">
+    <div class="container subcont">
     <!-- Zone des indices : lettres pour les lignes et numéros pour les colonnes -->
     <div class="indices">
         <div class="ligne_indices">
@@ -28,8 +29,21 @@
                 <?php } ?>
             </div>
         <?php } ?>
+        
     </div>
+    <button class="save" id="sauvegarder">Save</button>
+    </div>
+    <aside class="side_index">
+        <h2 class="title">Indices</h2>
+        <h3>horizontal</h3>
+        <input type="text">
+        <div> 
+        <button>Ajouter</button>
+        <button>Effacer</button>
+        </div>
+    </aside>
 </div>
+
 </body>
 
 </html>

@@ -15,7 +15,6 @@ require_once(__DIR__."/../model/userModel.php");
             $email = htmlspecialchars($_POST['email']);
             $role = 'user';
             if($this->UserModel->createUser($UserId, $name, $password, $email, $role)){
-                echo "Bonjour";
                 header("Location: login.html");
                 exit();
             }else{

@@ -27,3 +27,32 @@ div.addEventListener("input", () => {
     }
 }) ;
 });
+
+
+document.getElementById("sauvegarder").addEventListener("click",()=>{
+    let grille =[]
+    document.querySelectorAll(".grille_item").forEach(item=>{
+        const x = item.dataset.x;
+        const y = item.dataset.y;
+        const contenu = item.textContent.trim();
+        grille.push({ x, y, contenu: contenu || null });
+
+    });
+
+    fetch('../controllers/save_grid.php',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({grille_id: 1, cases: grille})
+    })
+    .then(response => response.json()).then(data => {
+        if(data.success){
+            alert('Grille sauvegardé avec succes !');
+        }else{
+            alert('ERREUR: '+data.message);
+        }
+    })
+    .catch(error =>{
+        console.error('Erreur lors de sending :', error);
+    });
+    
+});
