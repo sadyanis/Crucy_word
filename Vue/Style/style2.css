@@ -9,7 +9,7 @@ nav{
     background-color: rgb(37, 61, 61);
     display: flex;
     justify-content: space-between;
-    position: fixed;
+   
     
 }
 ul {
@@ -49,7 +49,7 @@ li a:hover{
 .container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
     padding: 20px;
 }
@@ -59,7 +59,7 @@ li a:hover{
     grid-template-columns: repeat(11, 30px); /* 10 colonnes + 1 pour les indices */
     grid-template-rows: repeat(11, 30px); /* 10 lignes + 1 pour les indices */
     gap: 0;
-    margin-left: 40%;
+    margin-left: 0;
 }
 
 .ligne_indices {
@@ -67,6 +67,14 @@ li a:hover{
 }
 
 .case {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(142, 137, 129);
+    font-weight: bold;
+    font-size: 18px;
+}
+.case2 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,30 +107,72 @@ li a:hover{
     background-color: black;
 }
 
-.side_index{
-    height: 100%;
-    width: 300px;
-    background-color: #ffffff;
-    border-radius: 30px;
-    overflow: hidden;
-    box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.75);
-    margin-top:7% ;
 
-}
-
-.title{
-    padding: 0;
-    margin: 0;
-    background-color:rgb(37, 61, 61);
-    text-align: center;
-    
-}
 .subcont{
     
-    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
-.save{
-    margin-left: 60%;
-   
 
+.save {
+    margin-top: 20px;
+    align-self: flex-start;
+    padding: 8px 16px;
+    background-color: rgb(37, 61, 61);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.save:hover {
+    background-color: rgb(50, 80, 80);
+}
+
+.side_index {
+    width: 300px;
+    height: 90%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    margin: 0;
+    background-color: rgb(37, 61, 61);
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.side_index h3 {
+    margin: 0 0 10px 0;
+}
+
+.side_index input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.side_index button {
+    padding: 8px 12px;
+    margin-right: 10px;
+    background-color: rgb(37, 61, 61);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.side_index button:hover {
+    background-color: rgb(50, 80, 80);
 }

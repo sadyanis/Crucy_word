@@ -9,11 +9,15 @@ for (let elt of cases){
 
 document.querySelectorAll(".case").forEach((div)=>{
 div.addEventListener("click",()=>{
+    if(!div.classList.contains("black")){
     div.setAttribute("contenteditable", "true");
     div.focus();
+    }
+
 });
 div.addEventListener("blur",()=>{
     div.removeAttribute("contenteditable");
+    div.style.border = "1px solid #ccc;";
 });
 div.addEventListener("input", () => {
     const content = div.textContent.toUpperCase().replace(/[^A-Z]/g, ""); // Filtrer uniquement les lettres
