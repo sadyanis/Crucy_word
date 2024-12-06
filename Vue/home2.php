@@ -37,18 +37,24 @@
         <h2 class="title">Indices</h2>
         <div>
             <h3>Horizontal</h3>
-            <input type="text" placeholder="Ajouter un indice...">
+            <div class="indications">
+                  <ol class="liste_indice" id="horizontal_indice"></ol>  
+            </div>
+            <input id="hor_indice" type="text" placeholder="Ajouter un indice...">
             <div>
-                <button>Ajouter</button>
-                <button>Effacer</button>
+                <button id="add_hor">Ajouter</button>
+                <button id="delete_hor">Effacer</button>
             </div>
         </div>
-        <div>
+        <div id="verticale">
             <h3>Vertical</h3>
-            <input type="text" placeholder="Ajouter un indice...">
+            <div class="indications">
+                  <ol class="liste_indice" id="vertical_indice"></ol>  
+            </div>
+            <input id="ver_indice" type="text" placeholder="Ajouter un indice...">
             <div>
-                <button>Ajouter</button>
-                <button>Effacer</button>
+                <button id="add_vert">Ajouter</button>
+                <button id="delete_ver">Effacer</button>
             </div>
         </div>
     </aside>

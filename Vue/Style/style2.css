@@ -19,7 +19,7 @@ ul {
     list-style-type: none;
     
 }
-li{
+ul li{
     display: inline;
     padding-right: 10px;
     width: 100%px;
@@ -132,7 +132,7 @@ li a:hover{
 
 .side_index {
     width: 300px;
-    height: 90%;
+    height: auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -175,4 +175,35 @@ li a:hover{
 
 .side_index button:hover {
     background-color: rgb(50, 80, 80);
+}
+
+.indications{
+    
+    overflow-y:auto;
+}
+
+.liste_indice{
+    list-style-position: inside;
+    padding-left: 0;
+    margin-left:0 ;
+}
+
+.liste_indice li{
+    margin-bottom: 5px;
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 5px;
+  
+    padding-left: 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.liste_indice li:hover {
+    outline: 2px solid #495562;
+   
+}
+
+aside input[type="text"]{
+    width: calc(100% - 20px);
+    font-size: 14px;
 }

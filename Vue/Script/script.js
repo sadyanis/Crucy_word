@@ -65,3 +65,56 @@ document.getElementById("sauvegarder").addEventListener("click",()=>{
     });
     
 });
+
+//ajout d'indices 
+
+document.getElementById("add_hor").addEventListener("click",() =>{
+    const input = document.getElementById("hor_indice");
+    const ol = document.getElementById("horizontal_indice");
+
+    // recuperer la valeur de l'input
+
+    const inputvalue = input.value.trim();
+    if(inputvalue){
+        const newli = document.createElement("li");
+        newli.textContent = inputvalue;
+        newli.setAttribute("contenteditable","true");
+        ol.appendChild(newli);
+
+        input.value ="";
+    }else{
+        alert("Veuillez entrer un indice avant d'ajouter");
+    }
+
+});
+
+//Ajout d'indices Vertical
+
+document.getElementById("add_vert").addEventListener("click",() =>{
+    const input = document.getElementById("ver_indice");
+    const ol = document.getElementById("vertical_indice");
+
+    const inputValue = input.value.trim();
+    if(inputValue){
+        const newli = document.createElement("li");
+        newli.textContent = inputValue;
+        newli.setAttribute("contenteditable","true");
+        ol.appendChild(newli);
+        input.value = "";
+    }else{
+        alert("Veuillez entrer un indice avant d'ajouter");
+    }
+})
+
+//effacer la liste horizontal
+
+document.getElementById("delete_hor").addEventListener("click",() =>{
+    const ol = document.getElementById("horizontal_indice");
+    ol.textContent ="";
+})
+
+//effacer la liste vertical
+document.getElementById("delete_ver").addEventListener("click",() =>{
+    const ol = document.getElementById("vertical_indice");
+    ol.textContent = "";
+})
