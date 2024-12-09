@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php session_start(); 
+if(!isset($_SESSION["user"])){
+    header("Location: ./LOGIN/login.html");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +46,8 @@
             </div>
             <input id="hor_indice" type="text" placeholder="Ajouter un indice...">
             <div>
-                <button id="add_hor">Ajouter</button>
-                <button id="delete_hor">Effacer</button>
+                <button class="list_btn" id="add_hor">Ajouter</button>
+                <button class="list_btn" id="delete_hor">Effacer</button>
             </div>
         </div>
         <div id="verticale">
@@ -53,8 +57,8 @@
             </div>
             <input id="ver_indice" type="text" placeholder="Ajouter un indice...">
             <div>
-                <button id="add_vert">Ajouter</button>
-                <button id="delete_ver">Effacer</button>
+                <button class="list_btn" id="add_vert">Ajouter</button>
+                <button class="list_btn" id="delete_ver">Effacer</button>
             </div>
         </div>
     </aside>

@@ -163,7 +163,8 @@ li a:hover{
     margin-bottom: 10px;
 }
 
-.side_index button {
+
+.list_btn {
     padding: 8px 12px;
     margin-right: 10px;
     background-color: rgb(37, 61, 61);
@@ -173,7 +174,7 @@ li a:hover{
     cursor: pointer;
 }
 
-.side_index button:hover {
+.list_btn:hover {
     background-color: rgb(50, 80, 80);
 }
 
@@ -189,12 +190,13 @@ li a:hover{
 }
 
 .liste_indice li{
+    
     margin-bottom: 5px;
     border-bottom: 1px dashed #ddd;
     padding-bottom: 5px;
-  
-    padding-left: 0;
+    width: calc(100% - 20px);
     border-radius: 4px;
+    margin-left: 5px;
     cursor: pointer;
 }
 
@@ -206,4 +208,17 @@ li a:hover{
 aside input[type="text"]{
     width: calc(100% - 20px);
     font-size: 14px;
+}
+
+.del_btn{
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    float: right;
+    
+
 }
