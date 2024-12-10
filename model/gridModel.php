@@ -23,6 +23,19 @@ class GridModel{
         die(" ". $e->getMessage());
         }
     }
+    // à vérifier
+    public function getGrids($userID){
+        try{
+            $sql = "SELECT * FROM grid WHERE userID = :userID";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([
+                ':userID'=> $userID,
+            ]);
+            return $stmt->fetchAll();
+        }catch(PDOException $e){
+            die("ERROR".$e->getMessage());
+        }
+    }
 
     public function addCase($caseID, $gridID,$row,$line,$contenu){
         try{
