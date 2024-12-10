@@ -53,7 +53,7 @@ if(!isset($_SESSION["user"])){
         <div id="verticale">
             <h3>Vertical</h3>
             <div class="indications">
-                  <ol class="liste_indice" id="vertical_indice"></ol>  
+                  <ol class="liste_indice" id="vertical_indice" type="A"></ol>  
             </div>
             <input id="ver_indice" type="text" placeholder="Ajouter un indice...">
             <div>

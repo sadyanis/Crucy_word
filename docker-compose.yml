@@ -4,7 +4,7 @@ services:
     volumes:
       - .:/var/www/html/
     ports:
-      - 80:80
+      - 8080:80
     
   db:
     image: mysql  # Utilisation correcte de `image` avec une version explicite
@@ -16,7 +16,7 @@ services:
       MYSQL_USER: crossword 
       MYSQL_PASSWORD: crossword_password
     ports:
-      - 3306:3306
+      - 3307:3306
 
   phpmyadmin:
     image: phpmyadmin
