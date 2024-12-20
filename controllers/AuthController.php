@@ -47,6 +47,14 @@ require_once(__DIR__."/../model/userModel.php");
         exit();
 
     }
+    public function isLogged(){
+        session_start();
+        if(isset($_SESSION['user'])){
+            return true;
+        }else{
+            return false;
+        }
+    }   
 
  }
 ?>

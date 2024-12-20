@@ -72,13 +72,13 @@ li a:hover{
     padding: 20px;
 }
 
-.indices {
+  .indices {
     display: grid;
-    grid-template-columns: repeat(11, 30px); /* 10 colonnes + 1 pour les indices */
-    grid-template-rows: repeat(11, 30px); /* 10 lignes + 1 pour les indices */
+    /* grid-template-columns: repeat(11, 30px); 
+    grid-template-rows: repeat(11, 30px);  */
     gap: 0;
     margin-left: 0;
-}
+      } 
 
 .ligne_indices {
     display: contents;
@@ -236,4 +236,62 @@ aside input[type="text"]{
     cursor: pointer;
     text-align: center;
     float: right;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    width: 300px;
+    border-radius: 8px;
+}
+
+.modal-content h3 {
+    margin: 0 0 10px 0;
+}
+
+.modal-content label {
+    display: block;
+    margin: 10px 0 5px 0;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
 }

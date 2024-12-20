@@ -24,13 +24,23 @@ class GridModel{
         }
     }
     // à vérifier
-    public function getGrids($userID){
-        try{
-            $sql = "SELECT * FROM grid WHERE userID = :userID";
+    public function getAllGridNames() {
+        try {
+            $sql = "SELECT gridName FROM grid";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                ':userID'=> $userID,
-            ]);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_COLUMN); // Récupère uniquement la colonne `gridName`
+        } catch (PDOException $e) {
+            die("ERROR: " . $e->getMessage());
+        }
+    }
+    
+
+    // retourne toutes les grilles disponibles
+    public function getAllGrids($userID){
+        try{
+            $sql = "SELECT gridName FROM grid ";
+            $stmt = $this->db->prepare($sql);
             return $stmt->fetchAll();
         }catch(PDOException $e){
             die("ERROR".$e->getMessage());
@@ -53,6 +63,23 @@ class GridModel{
         die("ERROR".$e->getMessage());
         }
 
+    }
+
+     public function getGridFormData() {
+        // Vérifier si les données du formulaire sont envoyées
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $gridName = filter_input(INPUT_POST, 'grid_name', FILTER_SANITIZE_STRING);
+            $gridDimension = filter_input(INPUT_POST, 'grid_dimension', FILTER_VALIDATE_INT);
+    
+            // Retourner les données sous forme de tableau associatif
+            return [
+                'grid_name' => $gridName,
+                'grid_dimension' => $gridDimension
+            ];
+        }
+    
+        // Retourner null si aucune donnée n'est envoyée
+        return null;
     }
 }
 
