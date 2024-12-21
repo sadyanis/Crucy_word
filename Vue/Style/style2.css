@@ -197,8 +197,9 @@ li a:hover{
 }
 
 .indications{
+    max-height: 150px;
+    overflow-y: scroll;
     
-    overflow-y:auto;
 }
 
 .liste_indice{
@@ -295,3 +296,4 @@ aside input[type="text"]{
     cursor: pointer;
     border-radius: 4px;
 }
+

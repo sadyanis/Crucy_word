@@ -39,13 +39,21 @@ div.addEventListener("input", () => {
 
 // sauvegarder
 document.getElementById("sauvegarder").addEventListener("click", () => {
-    
+    const grid = document.getElementsByClassName('indices')[0];
+    const gridDimension = parseInt(grid.getAttribute('data-dimension'));
+    const hintsV = document.getElementById("vertical_indice").children.length;
+    const hintsH = document.getElementById("horizontal_indice").children.length;
+
+    if (gridDimension !== hintsV || gridDimension !== hintsH) {
+        alert("Veuillez entrer tous les indices avant de sauvegarder");
+        return;
+    }
+
     let grille = [];
     let valid = true;
 
     document.querySelectorAll(".grille_item").forEach(item => {
-        const x = item.dataset.x;
-        const y = item.dataset.y;
+        const { x, y } = item.dataset;
         const contenu = item.textContent.trim();
 
         if (!contenu && !item.classList.contains("black")) {
@@ -65,12 +73,9 @@ document.getElementById("sauvegarder").addEventListener("click", () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ grille_id: 8, cases: grille })
     })
-    .then(response => response.json()).then(data => {
-        if (data.success) {
-            alert('Grille sauvegardée avec succès !');
-        } else {
-            alert('ERREUR: ' + data.message);
-        }
+    .then(response => response.json())
+    .then(data => {
+        alert(data.success ? 'Grille sauvegardée avec succès !' : 'ERREUR: ' + data.message);
     })
     .catch(error => {
         console.error('Erreur lors de l\'envoi :', error);

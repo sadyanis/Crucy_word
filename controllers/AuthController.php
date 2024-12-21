@@ -31,7 +31,7 @@ require_once(__DIR__."/../model/userModel.php");
             if($user){
                 session_start();
                 $_SESSION['user'] = $user['UserID'];
-                header("Location: ../Vue/home2.php");
+                header("Location: ../Vue/mainmenu.php");
                 exit();
             }else{
                 header("Location: ./LOGIN/login.html");

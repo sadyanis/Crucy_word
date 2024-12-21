@@ -62,7 +62,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
                 <button class="list_btn" id="delete_hor">Effacer</button>
             </div>
         </div>
-        <div id="verticale">
+        <div id="verticale" >
             <h3>Vertical</h3>
             <div class="indications">
                   <ol class="liste_indice" id="vertical_indice" type="A"></ol>  
