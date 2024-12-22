@@ -15,3 +15,33 @@ document.addEventListener('DOMContentLoaded', () => {
         aside.classList.remove('hidden');
     });
 });
+
+document.querySelectorAll('#vertical_indice li').forEach((li) => {
+    li.addEventListener('click',()=>{
+        const gridID = li.getAttribute('data-grid-id');
+        console.log(gridID);
+        // Envoyer une requête au serveur
+        fetch('../controllers/get_grid_data.php',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id: gridID})
+        })
+        .then(response => response.text())
+        .then((data)=>{
+            console.log(data);
+            data = JSON.parse(data);
+            if(data.success){
+            sessionStorage.setItem('gridData', JSON.stringify(data));
+            window.location.href = '../Vue/play.php';       
+        } else {
+            alert('Erreur lors de la récupération des données de la grille');
+        }
+
+    })
+    .catch(error => {
+        console.error('Erreur lors de l\'envoi :', error);
+    });
+    });
+});

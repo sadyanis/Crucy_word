@@ -29,7 +29,7 @@ $gridNames = $model->getAllGridNames();
                     <?php 
                      if (!empty($gridNames)) {
                         foreach ($gridNames as $gridName) {
-                            echo "<li>" . htmlspecialchars($gridName) . "</li>";
+                            echo "<li data-grid-id=\"" . htmlspecialchars($gridName['gridID']) . "\">" . htmlspecialchars($gridName['gridName']) . "</li>";
                         }
                     } else {
                         echo "<li>Aucune grille trouvée.</li>";

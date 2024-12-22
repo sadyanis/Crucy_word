@@ -74,8 +74,8 @@ li a:hover{
 
   .indices {
     display: grid;
-    /* grid-template-columns: repeat(11, 30px); 
-    grid-template-rows: repeat(11, 30px);  */
+     grid-template-columns: repeat(11, 30px); 
+    grid-template-rows: repeat(11, 30px);  
     gap: 0;
     margin-left: 0;
       } 

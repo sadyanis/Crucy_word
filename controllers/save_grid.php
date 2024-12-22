@@ -23,58 +23,71 @@ try {
     $horizontalHints = $data['horizontalHints'];
     $verticalHints = $data['verticalHints'];
 
-    // Connexion à la base de données
-    $pdo = (new Database())->connect();
+    $gridModel = new GridModel();
 
-    // Insérer les informations de la grille
-    $sql = "INSERT INTO grid (dimension, `date`, userID, gridName) VALUES (:dimension, NOW(), :userID, :gridName)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([
-        ':dimension' => $Dimension,
-        ':userID' => $userID,
-        ':gridName' => $grille_name,
-    ]);
-
-    $grille_id = $pdo->lastInsertId();
+    $grille_id = $gridModel->insertGrid($Dimension, $userID, $grille_name);
     if (!$grille_id) {
-        throw new Exception('Failed to insert grid');
-    }
+             throw new Exception('Failed to insert grid');
+         }
 
-    // Insérer les cases
-    $sql = "INSERT INTO cases (gridID, `row`, `line`, contenu) VALUES (:grille_id, :y, :x, :contenu)";
-    $stmt = $pdo->prepare($sql);
+    // inserer les cases
+    $gridModel->insertCases($grille_id, $cases);
+    // inserer les indices horizontaux
+    $gridModel->insertHints($grille_id, $horizontalHints, 'horizontal');
+    // inserer les indices verticaux
+    $gridModel->insertHints($grille_id, $verticalHints, 'vertical');     
+    // Connexion à la base de données
+    //$pdo = (new Database())->connect();
 
-    foreach ($cases as $case) {
-        $stmt->execute([
-            ':grille_id' => $grille_id,
-            ':x' => $case['x'],
-            ':y' => $case['y'],
-            ':contenu' => $case['contenu'] ?? null,
-        ]);
-    }
+    // // Insérer les informations de la grille
+    // $sql = "INSERT INTO grid (dimension, `date`, userID, gridName) VALUES (:dimension, NOW(), :userID, :gridName)";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute([
+    //     ':dimension' => $Dimension,
+    //     ':userID' => $userID,
+    //     ':gridName' => $grille_name,
+    // ]);
 
-    // Insérer les indices horizontaux
-    $sql = "INSERT INTO HINTS (hint_id, grid_id, hint_orientation, hint_content) VALUES (:hint_id, :grille_id, :hint_orientation, :hint_content)";
-    $stmt = $pdo->prepare($sql);
+    // $grille_id = $pdo->lastInsertId();
+    // if (!$grille_id) {
+    //     throw new Exception('Failed to insert grid');
+    // }
 
-    foreach ($horizontalHints as $hint) {
-        $stmt->execute([
-            'hint_id' => $hint['id'],
-            ':grille_id' => $grille_id,
-            ':hint_orientation' => 'horizontal',
-            ':hint_content' => $hint['contenu'],
-        ]);
-    }
+    // // Insérer les cases
+    // $sql = "INSERT INTO cases (gridID, `row`, `line`, contenu) VALUES (:grille_id, :y, :x, :contenu)";
+    // $stmt = $pdo->prepare($sql);
 
-    // Insérer les indices verticaux
-    foreach ($verticalHints as $hint) {
-        $stmt->execute([
-            'hint_id' => $hint['id'],
-            ':grille_id' => $grille_id,
-            ':hint_orientation' => 'vertical',
-            ':hint_content' => $hint['contenu'],
-        ]);
-    }
+    // foreach ($cases as $case) {
+    //     $stmt->execute([
+    //         ':grille_id' => $grille_id,
+    //         ':x' => $case['x'],
+    //         ':y' => $case['y'],
+    //         ':contenu' => $case['contenu'] ?? null,
+    //     ]);
+    // }
+
+    // // Insérer les indices horizontaux
+    // $sql = "INSERT INTO HINTS (hint_id, grid_id, hint_orientation, hint_content) VALUES (:hint_id, :grille_id, :hint_orientation, :hint_content)";
+    // $stmt = $pdo->prepare($sql);
+
+    // foreach ($horizontalHints as $hint) {
+    //     $stmt->execute([
+    //         'hint_id' => $hint['id'],
+    //         ':grille_id' => $grille_id,
+    //         ':hint_orientation' => 'horizontal',
+    //         ':hint_content' => $hint['contenu'],
+    //     ]);
+    // }
+
+    // // Insérer les indices verticaux
+    // foreach ($verticalHints as $hint) {
+    //     $stmt->execute([
+    //         'hint_id' => $hint['id'],
+    //         ':grille_id' => $grille_id,
+    //         ':hint_orientation' => 'vertical',
+    //         ':hint_content' => $hint['contenu'],
+    //     ]);
+    // }
 
     // Réponse JSON de succès
     echo json_encode(['success' => true]);

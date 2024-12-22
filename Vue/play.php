@@ -2,6 +2,8 @@
 if(!isset($_SESSION["user"])){
     header("Location: ./LOGIN/login.html");
 }
+$gridData = isset($_SESSION['gridData']) ? json_decode($_SESSION['gridData'], true) : null;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +11,8 @@ if(!isset($_SESSION["user"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./Style/style2.css">
-    <script src="./Script/script.js"defer></script>
+    <script src="./Script/script2.js?sdasdasd"defer></script>
+    
     <title>Home</title>
 </head>
 <body>

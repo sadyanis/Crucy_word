@@ -93,6 +93,7 @@ document.getElementById("sauvegarder").addEventListener("click", () => {
     })
     .then(response => response.text())
     .then(text => {
+        console.log(text);
         const data = JSON.parse(text);
         alert(data.success ? 'Grille sauvegardée avec succès !' : 'ERREUR: ' + data.message);
     })
