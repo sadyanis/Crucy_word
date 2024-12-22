@@ -5,7 +5,6 @@ for (let elt of cases){
         elt.textContent="";
         elt.blur();
         elt.classList.toggle("black");
-       console.log(elt) ;
     });
 }
 
@@ -41,13 +40,17 @@ div.addEventListener("input", () => {
 document.getElementById("sauvegarder").addEventListener("click", () => {
     const grid = document.getElementsByClassName('indices')[0];
     const gridDimension = parseInt(grid.getAttribute('data-dimension'));
+    const gridName = grid.getAttribute('data-name');
     const hintsV = document.getElementById("vertical_indice").children.length;
     const hintsH = document.getElementById("horizontal_indice").children.length;
-
-    if (gridDimension !== hintsV || gridDimension !== hintsH) {
+    const horizontalHints = [];
+    const verticalHints = [];
+ 
+    if (gridDimension-1 != hintsV || gridDimension-1 != hintsH) {
         alert("Veuillez entrer tous les indices avant de sauvegarder");
         return;
     }
+
 
     let grille = [];
     let valid = true;
@@ -67,14 +70,30 @@ document.getElementById("sauvegarder").addEventListener("click", () => {
         alert('ERREUR: Toutes les cases doivent être remplies ou noires.');
         return;
     }
+    document.querySelectorAll("#horizontal_indice li").forEach((li, index) => {
+        const text = li.firstChild.nodeValue.trim(); // Récupère uniquement le texte principal
+        horizontalHints.push({id: index + 1, contenu: text});
+    });
+    document.querySelectorAll("#vertical_indice li").forEach((li, index) => {
+        const text = li.firstChild.nodeValue.trim();
+        verticalHints.push({id : index+1, contenu: text});
+    });
+
 
     fetch('../controllers/save_grid.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ grille_id: 8, cases: grille })
+        body: JSON.stringify({ 
+            gridName: gridName,
+            gridDimension: gridDimension,
+            cases: grille,
+            horizontalHints:horizontalHints,
+            verticalHints:verticalHints,
+            })  
     })
-    .then(response => response.json())
-    .then(data => {
+    .then(response => response.text())
+    .then(text => {
+        const data = JSON.parse(text);
         alert(data.success ? 'Grille sauvegardée avec succès !' : 'ERREUR: ' + data.message);
     })
     .catch(error => {

@@ -1,5 +1,4 @@
 <?php 
-
 require_once __DIR__ . '/../controllers/AuthController.php';
  $AuthController = new AuthController();
  if(!$AuthController->isLogged()){
@@ -26,7 +25,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
 <div class="container">
     <div class="subcont">
     <!-- Zone des indices : lettres pour les lignes et numéros pour les colonnes -->
-    <div class="indices" data-dimension="<?php echo htmlspecialchars(((int)$gridDimension+1)); ?>">
+    <div class="indices" data-dimension="<?php echo htmlspecialchars(((int)$gridDimension+1)); ?>" data-name="<?php echo htmlspecialchars($gridName); ?>">
         <div class="ligne_indices">
             <div class="case"></div> <!-- Coin supérieur gauche -->
             <?php for ($i = 1; $i <= $gridDimension; $i++) { ?>
