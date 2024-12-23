@@ -101,22 +101,40 @@ class GridModel{
         return null;
     }
 
-    public function getGridData($gridID){
-        try{
-            $sql = "SELECT DISTINCT g.dimension, c.row, c.line , c.contenu, h.hint_orientation, h.hint_content FROM grid g 
-             left join cases c on g.gridID = c.gridID
-             left join HINTS h on g.gridID = h.grid_id
-             WHERE g.gridID = :gridID";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                ':gridID' => $gridID
-            ]);
-            
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }catch(PDOException $e){
-            die("ERROR".$e->getMessage());
+    public function getGridData($gridID) {
+        try {
+            // Récupérer les cases
+            $sqlCases = "SELECT c.row, c.line, c.contenu 
+                         FROM cases c
+                         WHERE c.gridID = :gridID";
+            $stmtCases = $this->db->prepare($sqlCases);
+            $stmtCases->execute([':gridID' => $gridID]);
+            $cases = $stmtCases->fetchAll(PDO::FETCH_ASSOC);
+    
+            // Récupérer les indices
+            $sqlHints = "SELECT h.hint_orientation, h.hint_content 
+                         FROM HINTS h
+                         WHERE h.grid_id = :gridID";
+            $stmtHints = $this->db->prepare($sqlHints);
+            $stmtHints->execute([':gridID' => $gridID]);
+            $hints = $stmtHints->fetchAll(PDO::FETCH_ASSOC);
+
+            // Recuperer la dimension de la grille
+            $sqlDimension = "SELECT dimension FROM grid WHERE gridID = :gridID";
+            $stmtDimension = $this->db->prepare($sqlDimension);
+            $stmtDimension->execute([':gridID' => $gridID]);
+            $dimension = $stmtDimension->fetch(PDO::FETCH_ASSOC);
+    
+            return [
+                'dimension' => $dimension,
+                'cases' => $cases,
+                'hints' => $hints,
+            ];
+        } catch (PDOException $e) {
+            die("ERROR: " . $e->getMessage());
         }
     }
+    
 }
 
 

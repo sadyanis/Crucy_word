@@ -3,7 +3,8 @@ if(!isset($_SESSION["user"])){
     header("Location: ./LOGIN/login.html");
 }
 $gridData = isset($_SESSION['gridData']) ? json_decode($_SESSION['gridData'], true) : null;
-
+$gridDimension =  $gridData['dimension']['dimension']-1;
+print_r($gridData['hints'][0]); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,18 +21,18 @@ $gridData = isset($_SESSION['gridData']) ? json_decode($_SESSION['gridData'], tr
 <div class="container">
     <div class="subcont">
     <!-- Zone des indices : lettres pour les lignes et numéros pour les colonnes -->
-    <div class="indices">
+    <div class="indices" data-dimension="<?php echo htmlspecialchars(((int)$gridDimension+1)); ?>">
         <div class="ligne_indices">
             <div class="case"></div> <!-- Coin supérieur gauche -->
-            <?php for ($i = 1; $i <= 10; $i++) { ?>
+            <?php for ($i = 1; $i <= $gridDimension; $i++) { ?>
                 <div class="case2"><?php echo $i; ?></div> <!-- Numéros de colonnes -->
             <?php } ?>
         </div>
 
-        <?php for ($i = 0; $i < 10; $i++) { ?>
+        <?php for ($i = 0; $i < $gridDimension; $i++) { ?>
             <div class="ligne_indices">
                 <div class="case2"><?php echo chr(65 + $i); ?></div> <!-- Lettres des lignes -->
-                <?php for ($j = 1; $j <= 10; $j++) { ?>
+                <?php for ($j = 1; $j <= $gridDimension; $j++) { ?>
                     <div class="case grille_item" id="case_<?php echo $i . "_" . $j-1; ?>" data-x="<?php echo $i?>" data-y="<?php echo $j-1?>"></div>
                 <?php } ?>
             </div>
@@ -46,21 +47,36 @@ $gridData = isset($_SESSION['gridData']) ? json_decode($_SESSION['gridData'], tr
         <div>
             <h3>Horizontal</h3>
             <div class="indications">
-                  <ol class="liste_indice" id="horizontal_indice"></ol>  
+                  <ol class="liste_indice" id="horizontal_indice">
+                  <?php foreach ($gridData['hints'] as $data) {
+                        $orientation = $data['hint_orientation'];
+                        $indice = $data['hint_content'];
+                        if ($orientation == 'horizontal') {
+
+                ?>
+                    <li><?php echo $indice; }}?></li>
+
+                  </ol>  
             </div>
             
             <div>
                 
             </div>
         </div>
+       
         <div id="verticale">
             <h3>Vertical</h3>
             <div class="indications">
-                  <ol class="liste_indice" id="vertical_indice" type="A"></ol>  
+                  <ol class="liste_indice" id="vertical_indice" type="A">
+                    <?php foreach ($gridData['hints'] as $data) {
+                            $orientation = $data['hint_orientation'];
+                            $indice = $data['hint_content'];
+                            if ($orientation == 'vertical') { ?>
+                        <li><?php echo $indice; }}?></li>
+                  </ol>  
             </div>
-            
             <div>
-                
+            
             </div>
         </div>
     </aside>

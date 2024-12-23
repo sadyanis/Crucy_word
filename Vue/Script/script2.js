@@ -45,3 +45,10 @@ document.querySelectorAll('#vertical_indice li').forEach((li) => {
     });
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementsByClassName('indices')[0];
+    const gridDimension = grid.getAttribute('data-dimension');
+    grid.style.gridTemplateColumns = `repeat(${gridDimension}, 30px)`;
+    grid.style.gridTemplateRows = `repeat(${gridDimension}, 30px)`;
+});
