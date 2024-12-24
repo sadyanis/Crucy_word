@@ -117,7 +117,7 @@ li a:hover{
     background-color: #e0e0e0;
 }
 
-/* Si vous souhaitez que la première ligne et la première colonne soient fixées */
+
 .case:nth-child(1) {
     font-weight: bold;
 }
@@ -219,9 +219,12 @@ li a:hover{
     cursor: pointer;
 }
 
-.liste_indice li:hover {
+#horizontal_indice li:hover {
     outline: 2px solid #495562;
    
+}
+#vertical_indice li:hover {
+    outline: 2px solid #495562;  
 }
 
 aside input[type="text"]{
