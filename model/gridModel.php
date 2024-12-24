@@ -11,13 +11,13 @@ class GridModel{
 
     public function insertGrid($dimension,$UserID,$gridName){
         try{
-            $sql ="INSERT INTO grid (dimension, `date`, userID, gridName) VALUES(:dimension, NOW() , :userID, :gridName )";
+            $sql ="INSERT INTO GRIDS (grid_dimension, `grid_date`, user_id, grid_name) VALUES(:grid_dimension, NOW() , :user_id, :grid_name )";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 
-                ':dimension'=> $dimension,
-                ':userID'=> $UserID,
-                ':gridName'=> $gridName,
+                ':grid_dimension'=> $dimension,
+                ':user_id'=> $UserID,
+                ':grid_name'=> $gridName,
             ]);
             return $this->db->lastInsertId();
         }catch(PDOException $e){
@@ -27,14 +27,14 @@ class GridModel{
 
     public function insertCases($gridId, $cases){
         try{
-            $sql = "INSERT INTO cases (gridID, `row`, `line`, contenu) VALUES (:gridID, :x, :y, :contenu)";
+            $sql = "INSERT INTO CELLS (grid_id, cell_row, cell_column, cell_content) VALUES (:grid_id, :x, :y, :cell_content)";
             $stmt = $this->db->prepare($sql);
             foreach($cases as $case){
                 $stmt->execute([
-                    ':gridID' => $gridId,
+                    ':grid_id' => $gridId,
                     ':x' => $case['x'],
                     ':y' => $case['y'],
-                    ':contenu' => $case['contenu'] ?? null,
+                    ':cell_content' => $case['contenu'] ?? null,
                 ]);
             }
     }
@@ -45,12 +45,12 @@ class GridModel{
 
     public function insertHints($gridID,$hints,$orientation){
         try{
-            $sql = "INSERT INTO HINTS (hint_id, grid_id, hint_orientation, hint_content) VALUES (:hint_id, :grille_id, :hint_orientation, :hint_content)";
+            $sql = "INSERT INTO HINTS (hint_id, grid_id, hint_orientation, hint_content) VALUES (:hint_id, :grid_id, :hint_orientation, :hint_content)";
             $stmt = $this->db->prepare($sql);
              foreach($hints as $hint)  {
                 $stmt->execute([
                     ':hint_id'=> $hint['id'],
-                    ':grille_id'=> $gridID,
+                    ':grid_id'=> $gridID,
                     ':hint_orientation'=> $orientation,
                     ':hint_content'=> $hint['contenu'],
                 ]);
@@ -63,7 +63,7 @@ class GridModel{
     // à vérifier
     public function getAllGridNames() {
         try {
-            $sql = "SELECT gridName,gridID FROM grid";
+            $sql = "SELECT grid_name, grid_id FROM GRIDS";
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC); // 
@@ -76,7 +76,7 @@ class GridModel{
     // retourne toutes les grilles disponibles
     public function getAllGrids($userID){
         try{
-            $sql = "SELECT gridName FROM grid ";
+            $sql = "SELECT grid_name FROM GRIDS ";
             $stmt = $this->db->prepare($sql);
             return $stmt->fetchAll();
         }catch(PDOException $e){
@@ -104,31 +104,31 @@ class GridModel{
     public function getGridData($gridID) {
         try {
             // Récupérer les cases
-            $sqlCases = "SELECT c.row, c.line, c.contenu 
-                         FROM cases c
-                         WHERE c.gridID = :gridID";
+            $sqlCases = "SELECT c.cell_row, c.cell_column, c.cell_content 
+                         FROM CELLS c
+                         WHERE c.grid_id = :grid_id";
             $stmtCases = $this->db->prepare($sqlCases);
-            $stmtCases->execute([':gridID' => $gridID]);
+            $stmtCases->execute([':grid_id' => $gridID]);
             $cases = $stmtCases->fetchAll(PDO::FETCH_ASSOC);
     
             // Récupérer les indices
             $sqlHints = "SELECT h.hint_orientation, h.hint_content 
                          FROM HINTS h
-                         WHERE h.grid_id = :gridID";
+                         WHERE h.grid_id = :grid_id";
             $stmtHints = $this->db->prepare($sqlHints);
-            $stmtHints->execute([':gridID' => $gridID]);
+            $stmtHints->execute([':grid_id' => $gridID]);
             $hints = $stmtHints->fetchAll(PDO::FETCH_ASSOC);
 
             // Recuperer la dimension de la grille
-            $sqlDimension = "SELECT dimension FROM grid WHERE gridID = :gridID";
+            $sqlDimension = "SELECT grid_dimension FROM GRIDS WHERE grid_id = :grid_id";
             $stmtDimension = $this->db->prepare($sqlDimension);
-            $stmtDimension->execute([':gridID' => $gridID]);
+            $stmtDimension->execute([':grid_id' => $gridID]);
             $dimension = $stmtDimension->fetch(PDO::FETCH_ASSOC);
     
             return [
-                'dimension' => $dimension,
-                'cases' => $cases,
-                'hints' => $hints,
+                'grid_dimension' => $dimension,
+                'CELLS' => $cases,
+                'HINTS' => $hints,
             ];
         } catch (PDOException $e) {
             die("ERROR: " . $e->getMessage());

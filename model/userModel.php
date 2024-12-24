@@ -13,14 +13,14 @@ class User {
     public function createUser($userId,$name,$passwd,$email,$role) {
         try{
         
-            $sql = "INSERT INTO user VALUES(:userID, :name, :passwd, :email, :role)";
+            $sql = "INSERT INTO USERS VALUES(:user_id, :user_name, :user_password, :user_email, :user_role)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
-                ':userID'=> $userId,
-                ':name'=> $name,
-                ':passwd'=> password_hash($passwd, PASSWORD_BCRYPT),
-                ':email'=> $email,
-                ':role'=> $role,
+                ':user_id'=> $userId,
+                ':user_name'=> $name,
+                ':user_password'=> password_hash($passwd, PASSWORD_BCRYPT),
+                ':user_email'=> $email,
+                ':user_role'=> $role,
             ]);
             return true;
 
@@ -33,12 +33,12 @@ class User {
     // Trouver un utilisateur par son nom d'utilisateur
     public function findUser($username,$password) {
         try{
-        $sql = "SELECT * FROM user WHERE UserID = :username" ;
+        $sql = "SELECT * FROM USERS WHERE user_id = :user_name" ;
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([':username' => $username]);
+        $stmt->execute([':user_name' => $username]);
         $user =  $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($user && password_verify($password,$user['password'])){
+        if($user && password_verify($password,$user['user_password'])){
             return $user;
         }
         return false;
@@ -49,7 +49,7 @@ class User {
 
     public function getUsers (){
       try{
-        $sql =  "SELECT UserID from user";
+        $sql =  "SELECT user_id from USERS";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);

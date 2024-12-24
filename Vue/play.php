@@ -3,8 +3,8 @@ if(!isset($_SESSION["user"])){
     header("Location: ./LOGIN/login.html");
 }
 $gridData = isset($_SESSION['gridData']) ? json_decode($_SESSION['gridData'], true) : null;
-$gridDimension =  $gridData['dimension']['dimension']-1;
-print_r($gridData['hints'][0]); 
+$gridDimension =  $gridData['grid_dimension']['grid_dimension']-1;
+//print_r($gridData); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +39,7 @@ print_r($gridData['hints'][0]);
         <?php } ?>
         
     </div>
-    <button class="save" id="sauvegarder">Submit</button>
+    <button class="save" id="sauvegarder">Soumettre</button>
     
     </div>
     <aside class="side_index">
@@ -48,7 +48,7 @@ print_r($gridData['hints'][0]);
             <h3>Horizontal</h3>
             <div class="indications">
                   <ol class="liste_indice" id="horizontal_indice">
-                  <?php foreach ($gridData['hints'] as $data) {
+                  <?php foreach ($gridData['HINTS'] as $data) {
                         $orientation = $data['hint_orientation'];
                         $indice = $data['hint_content'];
                         if ($orientation == 'horizontal') {
@@ -68,7 +68,7 @@ print_r($gridData['hints'][0]);
             <h3>Vertical</h3>
             <div class="indications">
                   <ol class="liste_indice" id="vertical_indice" type="A">
-                    <?php foreach ($gridData['hints'] as $data) {
+                    <?php foreach ($gridData['HINTS'] as $data) {
                             $orientation = $data['hint_orientation'];
                             $indice = $data['hint_content'];
                             if ($orientation == 'vertical') { ?>

@@ -45,7 +45,7 @@ document.getElementById("sauvegarder").addEventListener("click", () => {
     const hintsH = document.getElementById("horizontal_indice").children.length;
     const horizontalHints = [];
     const verticalHints = [];
- 
+
     if (gridDimension-1 != hintsV || gridDimension-1 != hintsH) {
         alert("Veuillez entrer tous les indices avant de sauvegarder");
         return;
@@ -70,6 +70,7 @@ document.getElementById("sauvegarder").addEventListener("click", () => {
         alert('ERREUR: Toutes les cases doivent être remplies ou noires.');
         return;
     }
+    /*
     document.querySelectorAll("#horizontal_indice li").forEach((li, index) => {
         const text = li.firstChild.nodeValue.trim(); // Récupère uniquement le texte principal
         horizontalHints.push({id: index + 1, contenu: text});
@@ -78,6 +79,21 @@ document.getElementById("sauvegarder").addEventListener("click", () => {
         const text = li.firstChild.nodeValue.trim();
         verticalHints.push({id : index+1, contenu: text});
     });
+    */
+
+    document.querySelectorAll("#horizontal_indice li").forEach((li, index) => {
+    const text = li.firstChild.nodeValue ? li.firstChild.nodeValue.trim() : "";
+    if (text) {
+        horizontalHints.push({ id: index + 1, contenu: text });
+    }
+});
+document.querySelectorAll("#vertical_indice li").forEach((li, index) => {
+    const text = li.firstChild.nodeValue ? li.firstChild.nodeValue.trim() : "";
+    if (text) {
+        verticalHints.push({ id: index + 1, contenu: text });
+    }
+});
+
 
 
     fetch('../controllers/save_grid.php', {
@@ -117,7 +133,7 @@ document.getElementById("add_hor").addEventListener("click",() =>{
 
         newli.textContent = inputvalue;
         //newli.setAttribute("contenteditable","true");
-        btn.textContent = "delete";
+        btn.textContent = "x";
         btn.classList.add("del_btn");
 
         btn.addEventListener("click",()=>{
@@ -154,7 +170,7 @@ document.getElementById("add_vert").addEventListener("click",() =>{
 
         newli.textContent = inputValue;
         //newli.setAttribute("contenteditable","true");
-        btn.textContent = "delete";
+        btn.textContent = "x";
         btn.classList.add("del_btn");
         newli.appendChild(btn);
         ol.appendChild(newli);

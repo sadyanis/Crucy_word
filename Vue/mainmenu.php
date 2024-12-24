@@ -29,7 +29,7 @@ $gridNames = $model->getAllGridNames();
                     <?php 
                      if (!empty($gridNames)) {
                         foreach ($gridNames as $gridName) {
-                            echo "<li data-grid-id=\"" . htmlspecialchars($gridName['gridID']) . "\">" . htmlspecialchars($gridName['gridName']) . "</li>";
+                            echo "<li data-grid-id=\"" . htmlspecialchars($gridName['grid_id']) . "\">" . htmlspecialchars($gridName['grid_name']) . "</li>";
                         }
                     } else {
                         echo "<li>Aucune grille trouvée.</li>";
@@ -53,7 +53,7 @@ $gridNames = $model->getAllGridNames();
             <input type="text" id="grid_name" name="grid_name" required>
 
             <label for="grid_dimension">Dimension :</label>
-            <input type="number" id="grid_dimension" name="grid_dimension" min="6" max="21" required>
+            <input type="number" id="grid_dimension" name="grid_dimension" min="2" max="26" required>
 
             <div class="modal-buttons">
                 <button type="submit" class="submit-btn">Créer</button>

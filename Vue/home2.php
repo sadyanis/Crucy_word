@@ -44,14 +44,14 @@ require_once __DIR__ . '/../controllers/AuthController.php';
     </div>
     
     <div>
-    <button class="save" id="sauvegarder">Save</button>
-    <button class="save" >Clear</button>
+    <button class="save" id="sauvegarder">Sauvegarder</button>
+    <button class="save" >Réinitialiser</button>
     </div>
     </div>
     <aside class="side_index">
         <h2 class="title">Indices</h2>
         <div>
-            <h3>Horizontal</h3>
+            <h3>Horizontalement</h3>
             <div class="indications">
                   <ol class="liste_indice" id="horizontal_indice"></ol>  
             </div>
@@ -62,7 +62,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
             </div>
         </div>
         <div id="verticale" >
-            <h3>Vertical</h3>
+            <h3>Verticalement</h3>
             <div class="indications">
                   <ol class="liste_indice" id="vertical_indice" type="A"></ol>  
             </div>

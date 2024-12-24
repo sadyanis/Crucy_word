@@ -30,7 +30,7 @@ require_once(__DIR__."/../model/userModel.php");
             $user = $this->UserModel->findUser($UserId, $password);
             if($user){
                 session_start();
-                $_SESSION['user'] = $user['UserID'];
+                $_SESSION['user'] = $user['user_id'];
                 header("Location: ../Vue/mainmenu.php");
                 exit();
             }else{

@@ -1,12 +1,12 @@
 <nav>
-<h2 class="logo"><a href="home2.php">CrussyWord</a></h2>
+<h2 class="logo"><a href="home2.php">CruciWeb</a></h2>
         <ul>
         
         
-            <li><a href="home2.php">Home</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="mainmenu.php">Home</a></li>
+            <!--<li><a href="#">Contact</a></li>
             <li><a href="#">Regles de Jeux</a></li>
-            <li><a href="#">Apropos</a></li>
+            <li><a href="#">Apropos</a></li> -->
         </ul>
         <div class="sing" >
             <ul>
@@ -14,8 +14,8 @@
             
             if(isset($_SESSION['user'])){
                 ?>
-                <li><a href="#"> <?php echo $_SESSION['user']; ?> </a></li>
-                <li><a href="logout.php">Deconnexion</a></li>
+                <li><a href="#"> <?php echo $_SESSION['user']; ?> </a></li> 
+                <li><a href="logout.php">Déconnexion</a></li>
 
                 <?php } else{ ?>
 
