@@ -63,7 +63,7 @@ class GridModel{
     // à vérifier
     public function getAllGridNames() {
         try {
-            $sql = "SELECT gridName,gridID FROM grid";
+            $sql = "SELECT gridName,gridID,userID FROM grid ";
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC); // 
@@ -81,6 +81,17 @@ class GridModel{
             return $stmt->fetchAll();
         }catch(PDOException $e){
             die("ERROR".$e->getMessage());
+        }
+    }
+    public function getUserGrids($userID){
+        try{
+            $sql = "SELECT gridName, gridID FROM grid WHERE userID = :userID";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':userID' => $userID]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }catch(PDOException $e){
+            die("ERROR".$e->getMessage());
+            
         }
     }
 

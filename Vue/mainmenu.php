@@ -2,6 +2,7 @@
 if(!isset($_SESSION["user"])){
     header("Location: ./LOGIN/login.html");
 }
+
 require_once __DIR__ . '/../model/gridModel.php';
 $model = new GridModel();
 $gridNames = $model->getAllGridNames();
@@ -37,9 +38,14 @@ $gridNames = $model->getAllGridNames();
                     ?>
                   </ol>  
             </div>
-            <div>
+            <div class="controls">
                 <button class="list_btn" id="add_grid_btn">Créer une grille</button>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="filter-my-grids" />
+                     Mes grilles seulement
+                </label>
             </div>
+
         </div>
         
     </aside>
@@ -63,6 +69,7 @@ $gridNames = $model->getAllGridNames();
     </div>
 </div>
 
-<script src="./Script/script2.js?asdasdasd" defer></script>
+
+<script src="./Script/scriptMainmenu.js" defer></script>
 </body>
 </html>

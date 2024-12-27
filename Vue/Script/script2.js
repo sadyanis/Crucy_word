@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', async () => {
    await fetchCorrectGrid();
     for(let i = 0; i < correctGrid.length; i++){
         for(let j = 0; j < correctGrid[i].length; j++){
-            console.log(correctGrid[i][j]);
            if(correctGrid[i][j] === null){
                const cell = document.getElementById(`case_${i}_${j}`);
                cell.classList.add('black');
@@ -155,4 +154,7 @@ document.querySelectorAll(".case").forEach((div)=>{
     
         return isCorrect;
     }
+
+    
+    
     
