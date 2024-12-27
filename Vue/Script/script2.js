@@ -6,120 +6,151 @@ document.addEventListener('DOMContentLoaded', () => {
     const aside = document.getElementById("side_index");
 
     addGridBtn.addEventListener('click', () => {
-        
-        modal.classList.remove('hidden');
-        aside.classList.add('hidden');
+        try {
+            modal.classList.remove('hidden');
+            aside.classList.add('hidden');
+        } catch (error) {
+            console.error('Error handling addGridBtn click:', error);
+        }
     });
 
     closeModal.addEventListener('click', () => {
-        modal.classList.add('hidden');
-        aside.classList.remove('hidden');
+        try {
+            modal.classList.add('hidden');
+            aside.classList.remove('hidden');
+        } catch (error) {
+            console.error('Error handling closeModal click:', error);
+        }
     });
 });
 
 document.querySelectorAll('#vertical_indice li').forEach((li) => {
-    li.addEventListener('click',()=>{
-        const gridID = li.getAttribute('data-grid-id');
-        console.log(gridID);
-        // Envoyer une requête au serveur
-        fetch('../controllers/get_grid_data.php',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({id: gridID})
-        })
-        .then(response => response.text())
-        .then((data)=>{
+    li.addEventListener('click', async () => {
+        try {
+            const gridID = li.getAttribute('data-grid-id');
+            console.log(gridID);
+            const response = await fetch('../controllers/get_grid_data.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: gridID })
+            });
+            const data = await response.text();
             console.log(data);
-            data = JSON.parse(data);
-            if(data.success){
-            sessionStorage.setItem('gridData', JSON.stringify(data));
-            window.location.href = '../Vue/play.php';       
-        } else {
-            alert('Erreur lors de la récupération des données de la grille');
+            const parsedData = JSON.parse(data);
+            if (parsedData.success) {
+                sessionStorage.setItem('gridData', JSON.stringify(parsedData));
+                window.location.href = '../Vue/play.php';
+            } else {
+                alert('Erreur lors de la récupération des données de la grille');
+            }
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi :', error);
         }
-
-    })
-    .catch(error => {
-        console.error('Erreur lors de l\'envoi :', error);
-    });
     });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementsByClassName('indices')[0];
-    const gridDimension = grid.getAttribute('data-dimension');
-    grid.style.gridTemplateColumns = `repeat(${gridDimension}, 30px)`;
-    grid.style.gridTemplateRows = `repeat(${gridDimension}, 30px)`;
-});
-
-
-document.addEventListener('DOMContentLoaded', async () => {
-   await fetchCorrectGrid();
-    for(let i = 0; i < correctGrid.length; i++){
-        for(let j = 0; j < correctGrid[i].length; j++){
-           if(correctGrid[i][j] === null){
-               const cell = document.getElementById(`case_${i}_${j}`);
-               cell.classList.add('black');
-           }
-        }
-        
+    try {
+        const grid = document.getElementsByClassName('indices')[0];
+        const gridDimension = grid.getAttribute('data-dimension');
+        grid.style.gridTemplateColumns = `repeat(${gridDimension}, 30px)`;
+        grid.style.gridTemplateRows = `repeat(${gridDimension}, 30px)`;
+    } catch (error) {
+        console.error('Error setting grid dimensions:', error);
     }
 });
 
-function fetchCorrectGrid(){
-    return fetch('../controllers/get_correct_grid.php')
-    .then(response => response.json())
-    .then(data => {
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        await fetchCorrectGrid();
+        for (let i = 0; i < correctGrid.length; i++) {
+            for (let j = 0; j < correctGrid[i].length; j++) {
+                if (correctGrid[i][j] === null) {
+                    const cell = document.getElementById(`case_${i}_${j}`);
+                    cell.classList.add('black');
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error initializing correct grid:', error);
+    }
+});
+
+async function fetchCorrectGrid() {
+    try {
+        const response = await fetch('../controllers/get_correct_grid.php');
+        const data = await response.json();
         correctGrid = data['data'];
-    }).catch(error => {
+    } catch (error) {
         console.error('Erreur lors de l\'envoi :', error);
-    });
+    }
 }
 
-document.querySelectorAll(".case").forEach((div)=>{
-    div.addEventListener("click",()=>{
-        if(!div.classList.contains("black")){
-        div.setAttribute("contenteditable", "true");
-        div.focus();
-        }
-    
-    });
-    div.addEventListener("blur",()=>{
-        div.removeAttribute("contenteditable");
-        div.style.border = "1px solid #ccc;";
-    });
-    div.addEventListener("input", () => {
-        if(!div.classList.contains("black")){
-            const content = div.textContent.toUpperCase().replace(/[^A-Z]/g, ""); // Filtrer uniquement les lettres
-            div.textContent = content.slice(0, 1); // Limiter à 1 caractère
+document.querySelectorAll(".case").forEach((div) => {
+    div.addEventListener("click", () => {
+        try {
+            if (!div.classList.contains("black")) {
+                div.setAttribute("contenteditable", "true");
+                div.focus();
             }
-      
-      });
-      
-      div.addEventListener("keydown",(e)=>{
-        if(e.key === "Enter"){
-            e.preventDefault();
-            div.blur();
+        } catch (error) {
+            console.error('Error handling case click:', error);
         }
-    }) ;
     });
 
-    document.getElementById("submit").addEventListener("click", () => {
+    div.addEventListener("blur", () => {
+        try {
+            div.removeAttribute("contenteditable");
+            div.style.border = "1px solid #ccc;";
+        } catch (error) {
+            console.error('Error handling case blur:', error);
+        }
+    });
+
+    div.addEventListener("input", () => {
+        try {
+            if (!div.classList.contains("black")) {
+                const content = div.textContent.toUpperCase().replace(/[^A-Z]/g, ""); // Filtrer uniquement les lettres
+                div.textContent = content.slice(0, 1); // Limiter à 1 caractère
+            }
+        } catch (error) {
+            console.error('Error handling case input:', error);
+        }
+    });
+
+    div.addEventListener("keydown", (e) => {
+        try {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                div.blur();
+            }
+        } catch (error) {
+            console.error('Error handling case keydown:', error);
+        }
+    });
+});
+
+document.getElementById("submit").addEventListener("click", () => {
+    try {
         const playerGrid = collectPlayerGrid();
         const result = verifyAnswers(playerGrid);
-        if(result){
+        if (result) {
             alert('Bravo ! Vous avez résolu la grille');
         } else {
             alert('Certaines réponses sont incorrectes');
         }
-    });
-    
-    function collectPlayerGrid() {
+    } catch (error) {
+        console.error('Error handling submit click:', error);
+    }
+});
+
+function collectPlayerGrid() {
+    try {
         const gridDimension = correctGrid.length; // Dimension de la grille
         const playerGrid = [];
-    
+
         for (let row = 0; row < gridDimension; row++) {
             const rowArray = [];
             for (let col = 0; col < gridDimension; col++) {
@@ -129,13 +160,17 @@ document.querySelectorAll(".case").forEach((div)=>{
             }
             playerGrid.push(rowArray);
         }
-    
-        return playerGrid;
-    }
 
-    function verifyAnswers(playerGrid) {
+        return playerGrid;
+    } catch (error) {
+        console.error('Error collecting player grid:', error);
+    }
+}
+
+function verifyAnswers(playerGrid) {
+    try {
         let isCorrect = true;
-    
+
         for (let row = 0; row < correctGrid.length; row++) {
             for (let col = 0; col < correctGrid[row].length; col++) {
                 if (playerGrid[row][col] !== (correctGrid[row][col] == null ? "" : correctGrid[row][col])) {
@@ -145,16 +180,15 @@ document.querySelectorAll(".case").forEach((div)=>{
                 }
             }
         }
-    
+
         if (isCorrect) {
             console.log("Toutes les réponses sont correctes !");
         } else {
             console.log("Certaines réponses sont incorrectes.");
         }
-    
-        return isCorrect;
-    }
 
-    
-    
-    
+        return isCorrect;
+    } catch (error) {
+        console.error('Error verifying answers:', error);
+    }
+}
