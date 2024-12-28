@@ -332,6 +332,8 @@ aside input[type="text"]{
 .level{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: grey;
+    margin-right: 5px;
+    
 }
 
 .liste_grids{
@@ -343,6 +345,7 @@ aside input[type="text"]{
 .liste_grids li{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 5px;
     border-bottom: 1px dashed #ddd;
     padding-bottom: 5px;

@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__."/../model/userModel.php");
+session_start();
 
  class AuthController{
     private $UserModel;
@@ -15,6 +16,10 @@ require_once(__DIR__."/../model/userModel.php");
             $email = htmlspecialchars($_POST['email']);
             $role = 'user';
             if($this->UserModel->createUser($UserId, $name, $password, $email, $role)){
+                if($_SESSION['role'] == 'admin'){
+                    header("Location: ../admin.php");
+                    exit();
+                }
                 header("Location: login.html");
                 exit();
             }else{
@@ -29,7 +34,13 @@ require_once(__DIR__."/../model/userModel.php");
             $password = htmlspecialchars($_POST['password']);
             $user = $this->UserModel->findUser($UserId, $password);
             if($user){
-                session_start();
+                if($user['role'] == 'admin'){
+                    $_SESSION['user'] = $user['UserID'];
+                    $_SESSION['role'] = "admin";
+                    header("Location: ../Vue/admin.php");
+                    exit();
+                }
+
                 $_SESSION['user'] = $user['UserID'];
                 $_SESSION['role'] = "user";
                 header("Location: ../Vue/mainmenu.php");
@@ -39,7 +50,7 @@ require_once(__DIR__."/../model/userModel.php");
                 
             }
         }else{
-            session_start();
+            
             $_SESSION['role'] = 'visitor';
             header("Location: ../Vue/mainmenu.php");
         }
@@ -54,7 +65,7 @@ require_once(__DIR__."/../model/userModel.php");
     }
     public function isLogged(){
         session_start();
-        if(isset($_SESSION['user'])){
+        if(isset($_SESSION['user']) || isset($_SESSION['role']) ){
             return true;
         }else{
             return false;

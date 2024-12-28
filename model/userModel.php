@@ -58,4 +58,15 @@ class User {
         die("Erreur Lors du creation des users: ". $e->getMessage());
        }  
     }
+
+    public function deleteUser($userID){
+        try{
+            $sql = "DELETE FROM user WHERE UserID = :userID";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':userID' => $userID]);
+            return true;
+        }catch(PDOException $e){
+            die("Erreur lors de la suppression de l'utilisateur: ".$e->getMessage());
+        }
+    }
 }

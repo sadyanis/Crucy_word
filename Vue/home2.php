@@ -8,7 +8,6 @@ require_once __DIR__ . '/../controllers/AuthController.php';
     $gridName = isset($_POST['grid_name']) ? htmlspecialchars($_POST['grid_name'], ENT_QUOTES, 'UTF-8') : null;
     $gridDimension = isset($_POST['grid_dimension']) ? (int)$_POST['grid_dimension'] : 10;
  }
-echo $_POST['level'];
 ?>
 <!DOCTYPE html>
 <html lang="en">

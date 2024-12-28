@@ -1,9 +1,9 @@
 <nav>
-<h2 class="logo"><a href="home2.php">CrussyWord</a></h2>
+<h2 class="logo"><a href="mainmenu.php">CrussyWord</a></h2>
         <ul>
         
         
-            <li><a href="home2.php">Home</a></li>
+            <li><a href="mainmenu.php">Home</a></li>
             <li><a href="#">Contact</a></li>
             <li><a href="#">Regles de Jeux</a></li>
             <li><a href="#">Apropos</a></li>

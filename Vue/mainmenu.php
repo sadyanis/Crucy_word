@@ -1,7 +1,7 @@
 <?php session_start();
-if(isset($_SESSION["role"])&& $_SESSION["role"] == "visitor"){
+if(isset($_SESSION["role"])){
 $role = $_SESSION["role"];
-}
+};
 // if(!isset($_SESSION["user"])){
 //     header("Location: ./LOGIN/login.html");
 // }
@@ -44,7 +44,7 @@ $gridNames = $model->getAllGridNames();
                   </ol>  
             </div>
             <div class="controls">
-                <?php if($role != "visitor"){ ?>
+                <?php if(isset($role) && $role != "visitor"){ ?>
                 <button class="list_btn" id="add_grid_btn">Créer une grille</button>
                 <?php } ?>
                 <label class="checkbox-label">

@@ -1,7 +1,7 @@
 <?php session_start(); 
-if(!isset($_SESSION["user"])){
-    header("Location: ./LOGIN/login.html");
-}
+// if(!isset($_SESSION["user"])){
+//     header("Location: ./LOGIN/login.html");
+// }
 $gridData = isset($_SESSION['gridData']) ? json_decode($_SESSION['gridData'], true) : null;
 $gridDimension =  $gridData['dimension']['dimension']-1;
 
