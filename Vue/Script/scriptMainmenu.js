@@ -69,10 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         const checkbox = document.getElementById('filter-my-grids');
         const gridList = document.getElementById('vertical_indice');
-        fetchGrids();
+        
         checkbox.addEventListener('change', () => {
-            const showMyGrids = checkbox.checked;
-            fetchGrids(showMyGrids);
+            const showordered = checkbox.checked;
+            fetchGrids(showordered);
         });
     } catch (error) {
         console.error('Error initializing filter checkbox:', error);
@@ -81,11 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Fonction pour récupérer les grilles
 function fetchGrids(filterMyGrids = false) {
-    const url = filterMyGrids ? '../controllers/get_user_grids.php' : '../controllers/get_all_grids.php';
-    
-    fetch(url)
-        .then(response => response.json())
+    console.log(filterMyGrids);
+    fetch('../controllers/get_all_grids.php',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filter: filterMyGrids })
+    })
+        .then(response => response.text())
         .then(data => {
+            data = JSON.parse(data);
             try {
                 updateGridList(data);
             } catch (error) {
@@ -101,10 +105,15 @@ function updateGridList(grids) {
     try {
         const gridList = document.getElementById('vertical_indice');
         gridList.innerHTML = ''; // Vider la liste existante
+        
 
         if (grids.length > 0) {
             grids.forEach(grid => {
                 const listItem = createGridListItem(grid);
+                const dificulty = document.createElement('span');
+                dificulty.textContent = grid.level;
+                dificulty.classList.add('level');
+                listItem.appendChild(dificulty);
                 gridList.appendChild(listItem);
             });
             addGridClickListeners();
@@ -139,10 +148,31 @@ function createGridListItem(grid) {
 function createModifyButton(gridID) {
     try {
         const btn = document.createElement('button');
-        btn.textContent = 'modify';
+        btn.textContent = 'delete';
         btn.addEventListener('click', (event) => {
             event.stopPropagation(); // Empêche le déclenchement d'autres événements sur le <li>
-            console.log('Modifier la grille', gridID);
+            const confirmation = confirm('Voulez-vous vraiment supprimer cette grille ?');
+            if (!confirmation) return;
+            // Envoyer une requête au serveur pour supprimer la grille
+            fetch('../controllers/delete_grid.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: gridID })
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        btn.parentElement.remove(); // Supprimer l'élément <li> parent
+                        console.log('Grille supprimée', gridID);
+                    } else {
+                        alert('Erreur lors de la suppression de la grille');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur lors de l\'envoi :', error);
+                });
+          
         });
         return btn;
     } catch (error) {

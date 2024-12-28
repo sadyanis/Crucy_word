@@ -22,10 +22,11 @@ try {
     $Dimension = $data['gridDimension'];
     $horizontalHints = $data['horizontalHints'];
     $verticalHints = $data['verticalHints'];
+    $gridLevel = $data['gridLevel'];
 
     $gridModel = new GridModel();
 
-    $grille_id = $gridModel->insertGrid($Dimension, $userID, $grille_name);
+    $grille_id = $gridModel->insertGrid($Dimension,$gridLevel , $userID, $grille_name);
     if (!$grille_id) {
              throw new Exception('Failed to insert grid');
          }

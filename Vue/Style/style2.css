@@ -217,8 +217,7 @@ li a:hover{
     border-radius: 4px;
     margin-left: 5px;
     cursor: pointer;
-    display: flex;
-    justify-content: space-between;
+    
 }
 
 #horizontal_indice li:hover {
@@ -329,5 +328,28 @@ aside input[type="text"]{
 .checkbox-label:hover {
     color: #007bff; /* Changement de couleur du texte au survol */
 }
+/*  */
+.level{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: grey;
+}
 
+.liste_grids{
+    list-style-position: inside;
+    padding-left: 0;
+    margin-left:0 ;
+}
 
+.liste_grids li{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 5px;
+    margin-left: 5px;
+    width: calc(100% - 20px);
+    border-radius: 4px;
+    
+    cursor: pointer;
+
+}

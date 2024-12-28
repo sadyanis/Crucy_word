@@ -31,12 +31,17 @@ require_once(__DIR__."/../model/userModel.php");
             if($user){
                 session_start();
                 $_SESSION['user'] = $user['UserID'];
+                $_SESSION['role'] = "user";
                 header("Location: ../Vue/mainmenu.php");
                 exit();
             }else{
                 header("Location: ./LOGIN/login.html");
                 
             }
+        }else{
+            session_start();
+            $_SESSION['role'] = 'visitor';
+            header("Location: ../Vue/mainmenu.php");
         }
     }
     public function Logout(){

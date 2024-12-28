@@ -51,7 +51,8 @@ $gridDimension =  $gridData['dimension']['dimension']-1;
             <h3>Horizontal</h3>
             <div class="indications">
                   <ol class="liste_indice" id="horizontal_hint">
-                  <?php foreach ($gridData['hints'] as $data) {
+                  <?php  
+                  foreach ($gridData['hints'] as $data) {
                         $orientation = $data['hint_orientation'];
                         $indice = $data['hint_content'];
                         if ($orientation == 'horizontal') {
@@ -71,11 +72,13 @@ $gridDimension =  $gridData['dimension']['dimension']-1;
             <h3>Vertical</h3>
             <div class="indications">
                   <ol class="liste_indice" id="vertical_hints" type="A">
-                    <?php foreach ($gridData['hints'] as $data) {
+                    <?php 
+                    $index = 0;
+                    foreach ($gridData['hints'] as $data) {
                             $orientation = $data['hint_orientation'];
                             $indice = $data['hint_content'];
                             if ($orientation == 'vertical') { ?>
-                        <li><?php echo $indice; }}?></li>
+                        <li><?php echo   $indice; }}?></li>
                   </ol>  
             </div>
             <div>

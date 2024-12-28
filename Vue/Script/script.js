@@ -66,6 +66,7 @@ function saveGrid() {
         const grid = document.getElementsByClassName('indices')[0];
         const gridDimension = parseInt(grid.getAttribute('data-dimension'));
         const gridName = grid.getAttribute('data-name');
+        const gridLevel = grid.getAttribute('data-level');
         const hintsV = document.getElementById("vertical_indice").children.length;
         const hintsH = document.getElementById("horizontal_indice").children.length;
         const horizontalHints = [];
@@ -111,6 +112,7 @@ function saveGrid() {
             body: JSON.stringify({
                 gridName: gridName,
                 gridDimension: gridDimension,
+                gridLevel: gridLevel,
                 cases: grille,
                 horizontalHints: horizontalHints,
                 verticalHints: verticalHints,
@@ -209,3 +211,21 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error in DOMContentLoaded event:', error);
     }
 });
+
+
+
+
+
+
+// Fetch the correct grid data
+async function fetchCorrectGrid() {
+    try {
+        const response = await fetch('../controllers/get_correct_grid.php');
+        const data = await response.json();
+        correctGrid = data['data'];
+    } catch (error) {
+        console.error('Erreur lors de l\'envoi :', error);
+    }
+}
+
+

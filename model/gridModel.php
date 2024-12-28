@@ -9,15 +9,27 @@ class GridModel{
     }
 
 
-    public function insertGrid($dimension,$UserID,$gridName){
+    public function insertGrid($dimension,$level,$UserID,$gridName){
+         switch($level){
+            case 1:
+                $level = "debutant";
+                break;
+            case 2:
+                $level = "intermediaire";
+                break;
+            case 3:
+                $level = "expert";
+                break;        
+         }
         try{
-            $sql ="INSERT INTO grid (dimension, `date`, userID, gridName) VALUES(:dimension, NOW() , :userID, :gridName )";
+            $sql ="INSERT INTO grid (dimension, `level`, `date`, userID, gridName) VALUES(:dimension, :level , NOW() , :userID, :gridName )";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 
                 ':dimension'=> $dimension,
                 ':userID'=> $UserID,
                 ':gridName'=> $gridName,
+                ':level'=> $level
             ]);
             return $this->db->lastInsertId();
         }catch(PDOException $e){
@@ -63,7 +75,7 @@ class GridModel{
     // à vérifier
     public function getAllGridNames() {
         try {
-            $sql = "SELECT gridName,gridID,userID FROM grid ";
+            $sql = "SELECT gridName,gridID,userID ,`level` FROM grid order by `date` ";
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC); // 
@@ -74,11 +86,13 @@ class GridModel{
     
 
     // retourne toutes les grilles disponibles
-    public function getAllGrids($userID){
+    public function getAllGridsByLevel(){
         try{
-            $sql = "SELECT gridName FROM grid ";
+            $sql = "SELECT gridName,gridID,userID ,`level` FROM grid ORDER BY 
+    `level`";
             $stmt = $this->db->prepare($sql);
-            return $stmt->fetchAll();
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }catch(PDOException $e){
             die("ERROR".$e->getMessage());
         }
@@ -143,6 +157,17 @@ class GridModel{
             ];
         } catch (PDOException $e) {
             die("ERROR: " . $e->getMessage());
+        }
+    }
+    public function deleteGrid($gridID){
+        try{
+            $sql = "DELETE FROM grid WHERE gridID = :gridID";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':gridID' => $gridID]);
+            return true;
+        }catch(PDOException $e){
+            die("ERROR: " . $e->getMessage());
+
         }
     }
     
