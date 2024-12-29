@@ -30,6 +30,7 @@ async function addGridClickListeners() {
     try {
         document.querySelectorAll('#vertical_indices li').forEach((li) => {
             li.addEventListener('click', async () => {
+                console.log("bonjour")
                 const gridID = li.getAttribute('data-grid-id');
                 console.log(gridID);
                 // Envoyer une requête au serveur
@@ -64,7 +65,7 @@ async function addGridClickListeners() {
 
 document.addEventListener('DOMContentLoaded',  () => {
     try {
-       // addGridClickListeners();
+        addGridClickListeners();
         
     } catch (error) {
         console.error('Error initializing grid click listeners:', error);

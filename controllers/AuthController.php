@@ -15,6 +15,9 @@ session_start();
             $password = htmlspecialchars($_POST['password']);
             $email = htmlspecialchars($_POST['email']);
             $role = 'user';
+            if(!isset($_SESSION['role'])){
+                $_SESSION['role'] = $role;
+            }
             if($this->UserModel->createUser($UserId, $name, $password, $email, $role)){
                 if($_SESSION['role'] == 'admin'){
                     header("Location: ../admin.php");
