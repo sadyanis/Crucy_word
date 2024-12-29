@@ -2,13 +2,6 @@
 if(isset($_SESSION["role"])){
 $role = $_SESSION["role"];
 };
-if(isset($_SESSION['gameData'])){
-    unset($_SESSION['gameData']);
-}
-if(isset($_SESSION['gridID'])){
-    unset($_SESSION['gridID']);
-}
-
 // if(!isset($_SESSION["user"])){
 //     header("Location: ./LOGIN/login.html");
 // }
@@ -30,15 +23,15 @@ $gridNames = $model->getAllGridNames();
 </head>
 <body>
 <?php require_once(__DIR__.'/menu.php') ?>
-<div class="gridsettings">
+<div class="gridsetting">
     
-    <aside class="side_index" id="sideIndex2">
+    <aside class="side_index" id="side_index">
         <h2 class="title">Grilles</h2>
         <div>
             <h4>Veuillez sélectionner une grille :</h4>
             <div class="indications">
 
-                  <ol class="liste_grids" id="vertical_indices">
+                  <ol class="liste_grids" id="vertical_indice">
                     <?php 
                      if (!empty($gridNames)) {
                         foreach ($gridNames as $gridName) {
@@ -51,9 +44,9 @@ $gridNames = $model->getAllGridNames();
                   </ol>  
             </div>
             <div class="controls">
-                
-                <button class="list_btn" id="add_grid_btnn">Créer une grille</button>
-                
+                <?php if(isset($role) && $role != "visitor"){ ?>
+                <button class="list_btn" id="add_grid_btn">Créer une grille</button>
+                <?php } ?>
                 <label class="checkbox-label">
                     <input type="checkbox" id="filter-my-grids" />
                      Trier par difficulté
@@ -63,29 +56,9 @@ $gridNames = $model->getAllGridNames();
         </div>
         
     </aside>
+    </div>
 
-    <aside class="side_index" id="sideIndex">
-        <h2 class="title">Parties</h2>
-        <div>
-            <h4>Veuillez sélectionner une partie :</h4>
-            <div class="indications">
-
-                  <ol class="liste_grids" id="liste_games">
-                    <li> Aucune partie </li>
-                  </ol>  
-            </div>
-            <div class="controls">
-                
-
-            </div>
-
-        </div>
-        
-    </aside>
-
-</div>
-
-<div id="modale" class="modal hidden">
+    <div id="modal" class="modal hidden">
     <div class="modal-content">
         <h3 class="title">Créer une nouvelle grille</h3>
         <form id="create-grid-form" action="home2.php" method="POST">
@@ -103,13 +76,13 @@ $gridNames = $model->getAllGridNames();
             </select>
             <div class="modal-buttons">
                 <button type="submit" class="submit-btn">Créer</button>
-                <button type="button" id="close_modale" class="cancel-btn">Annuler</button>
+                <button type="button" id="close_modal" class="cancel-btn">Annuler</button>
             </div>
         </form>
     </div>
 </div>
 
 
-<script src="./Script/mainmenuUser.js" defer></script>
+<script src="./Script/scriptMainmenu.js" defer></script>
 </body>
 </html>

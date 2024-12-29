@@ -124,6 +124,7 @@ function saveGrid() {
                     console.log(text);
                     const data = JSON.parse(text);
                     alert(data.success ? 'Grille sauvegardée avec succès !' : 'ERREUR: ' + data.message);
+                    window.location.href = '../Vue/mainmenu.php';
                 } catch (error) {
                     console.error('Error parsing response:', error);
                 }

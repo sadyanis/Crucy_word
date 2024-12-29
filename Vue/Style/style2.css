@@ -58,7 +58,7 @@ li a:hover{
 
 .gridsettings {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 80vh;
     padding: 20px;    
@@ -355,4 +355,11 @@ aside input[type="text"]{
     
     cursor: pointer;
 
+}
+.gridsetting{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    padding: 20px;
 }

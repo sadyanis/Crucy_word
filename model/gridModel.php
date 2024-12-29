@@ -54,6 +54,27 @@ class GridModel{
         die(" ". $e->getMessage());
     }
 }
+    public function insertGame($userID,$gridID,$gameData){
+        try{
+            $sql = "DELETE FROM GAMES WHERE grid_id = :gridID AND user_id = :userID";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':gridID' => $gridID, ':userID' => $userID]);
+            $stmt->closeCursor();
+            $sql = "INSERT INTO GAMES (user_id, grid_id, cell_row, cell_column, cell_content) VALUES (:userID, :gridID, :x, :y, :contenu)";
+            $stmt = $this->db->prepare($sql);
+            foreach($gameData as $case){
+                $stmt->execute([
+                    ':userID' => $userID,
+                    ':gridID' => $gridID,
+                    ':x' => $case['x'],
+                    ':y' => $case['y'],
+                    ':contenu' => $case['contenu'] ?? null,
+                ]);
+            }
+        }catch(PDOException $e){
+            die(" ". $e->getMessage());
+        }
+    }
 
     public function insertHints($gridID,$hints,$orientation){
         try{
@@ -170,9 +191,30 @@ class GridModel{
 
         }
     }
+    public function getGames($userID){
+        try{
+            $sql = "SELECT  distinct G1.gridName,G1.gridID,G1.level,G2.user_id FROM grid G1 left join GAMES G2  on G1.gridID = G2.grid_id WHERE G2.user_id = :userID";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':userID' => $userID]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }catch(PDOException $e){
+            die("ERROR".$e->getMessage());
+        }
+    }
+    public function getGameData($gameID,$userID){
+        try{
+            $sql = "SELECT cell_row, cell_column, cell_content FROM GAMES WHERE grid_id = :gameID AND user_id = :userID";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([':gameID' => $gameID, ':userID' => $userID]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }catch(PDOException $e){
+            die("ERROR".$e->getMessage());
+            
+        }
+    }
     
 }
 
 
 
-?>
+?>  

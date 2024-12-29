@@ -2,7 +2,8 @@
 // if(!isset($_SESSION["user"])){
 //     header("Location: ./LOGIN/login.html");
 // }
-$gridData = isset($_SESSION['gridData']) ? json_decode($_SESSION['gridData'], true) : null;
+
+$gridData = isset($_SESSION['gridData']) ? $_SESSION['gridData'] : null;
 $gridDimension =  $gridData['dimension']['dimension']-1;
 
 
@@ -42,7 +43,12 @@ $gridDimension =  $gridData['dimension']['dimension']-1;
         <?php } ?>
         
     </div>
-    <button class="save" id="submit">Submit</button>
+    <div>
+        <button class="save" id="submit">Submit</button>
+        <?php if(isset($_SESSION['role']) && $_SESSION['role'] !== 'visitor'){ ?>
+        <button class="save" id="reset">save</button>
+         <?php } ?>
+    </div>
     
     </div>
     <aside class="side_index">

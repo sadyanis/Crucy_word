@@ -40,6 +40,7 @@ session_start();
                     header("Location: ../Vue/admin.php");
                     exit();
                 }
+                
 
                 $_SESSION['user'] = $user['UserID'];
                 $_SESSION['role'] = "user";
@@ -52,11 +53,11 @@ session_start();
         }else{
             
             $_SESSION['role'] = 'visitor';
-            header("Location: ../Vue/mainmenu.php");
+            header("Location: ../Vue/mainmenuVisitor.php");
         }
     }
     public function Logout(){
-        session_start();
+        
         session_unset();
         session_destroy();
         header("Location: ./LOGIN/login.html");
@@ -64,7 +65,6 @@ session_start();
 
     }
     public function isLogged(){
-        session_start();
         if(isset($_SESSION['user']) || isset($_SESSION['role']) ){
             return true;
         }else{

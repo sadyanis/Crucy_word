@@ -4,7 +4,7 @@ services:
     volumes:
       - .:/var/www/html/
     ports:
-      - 8080:80
+      - 8081:80
     
   db:
     image: mysql  # Utilisation correcte de `image` avec une version explicite

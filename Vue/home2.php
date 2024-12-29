@@ -44,7 +44,6 @@ require_once __DIR__ . '/../controllers/AuthController.php';
     
     <div>
     <button class="save" id="sauvegarder">Save</button>
-    <button class="save" >Clear</button>
     </div>
     </div>
     <aside class="side_index">
