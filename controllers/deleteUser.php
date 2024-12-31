@@ -1,6 +1,6 @@
 <?php
 header('content-type: application/json');
-require_once(__DIR__ . '/../model/UserModel.php');
+require_once(__DIR__ . '/../model/userModel.php');
 
 $model = new User();
 

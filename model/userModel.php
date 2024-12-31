@@ -49,7 +49,7 @@ class User {
 
     public function getUsers (){
       try{
-        $sql =  "SELECT UserID from user";
+        $sql =  "SELECT UserID from user where role != 'admin'";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
