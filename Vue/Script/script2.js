@@ -162,6 +162,7 @@ document.getElementById("submit").addEventListener("click", () => {
         if (result) {
             showSuccessMessage();
         } else {
+
             alert('Certaines réponses sont incorrectes');
         }
     } catch (error) {
@@ -199,7 +200,7 @@ function verifyAnswers(playerGrid) {
             for (let col = 0; col < correctGrid[row].length; col++) {
                 if (playerGrid[row][col] !== (correctGrid[row][col] == null ? "" : correctGrid[row][col])) {
                     console.log(`Erreur à la case [${row}, ${col}]`);
-                    console.log(`Attendu : ${correctGrid[row][col]}, Reçu : ${playerGrid[row][col]}`);
+                    showWrongAnswers(col, row);
                     isCorrect = false;
                 }
             }
@@ -287,3 +288,21 @@ function closeModal() {
     modal.classList.add('hidden');
 }
 
+// fonction qui affiche les movaise case en rouge
+function showWrongAnswers(col, row) {
+    try {
+        const cell = document.getElementById(`case_${row}_${col}`);
+        
+        cell.style.color = "red";
+        cell.style.border = "1px solid red";
+
+        
+        setTimeout(() => {
+            cell.style.color = ""; 
+            cell.style.border = ""; 
+        }, 3000); 
+
+    } catch (error) {
+        console.error('Error showing wrong answers:', error);
+    }
+}
