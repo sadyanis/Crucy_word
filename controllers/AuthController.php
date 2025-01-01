@@ -4,32 +4,39 @@ session_start();
 
  class AuthController{
     private $UserModel;
+    public $error_message;
     public function __construct(){
         $this->UserModel = new User();
     }
 
-    public function Register(){
-        if($_SERVER['REQUEST_METHOD']==='POST'){
+    public function Register() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $UserId = htmlspecialchars($_POST['UserName']);
             $name = htmlspecialchars($_POST['Name']);
             $password = htmlspecialchars($_POST['password']);
             $email = htmlspecialchars($_POST['email']);
             $role = 'user';
-            if(!isset($_SESSION['role'])){
+    
+            if (!isset($_SESSION['role'])) {
                 $_SESSION['role'] = $role;
             }
-            if($this->UserModel->createUser($UserId, $name, $password, $email, $role)){
-                if($_SESSION['role'] == 'admin'){
+    
+            $result = $this->UserModel->createUser($UserId, $name, $password, $email, $role);
+    
+            if ($result === true) {
+                if ($_SESSION['role'] == 'admin') {
                     header("Location: ../admin.php");
                     exit();
                 }
                 header("Location: login.html");
                 exit();
-            }else{
-                return "Erreur lors de l'inscription";
+            } else {
+                // si une erreur s'est produite stocker le message dans error_message
+                $this->error_message = $result;
             }
         }
     }
+    
 
     public function Login(){
         if($_SERVER['REQUEST_METHOD']==='POST'){

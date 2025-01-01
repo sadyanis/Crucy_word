@@ -213,6 +213,7 @@ transition: all ease-in-out 250ms;
 
 .error {
     color: red;
-    font-size: 0.9em;
-    
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
 }

@@ -18,12 +18,13 @@ $controler->Register();
     <title> Login</title>
 </head>
 <body>
+    
     <div class="container">
 
         <div class="formContainer">
             
             <div class="sliderSection">
-               <img src="Images_log\Organizing projects-rafiki.png" alt="slideImage" id="img"> 
+               <img src="Images_log\pexels-brettjordan-6550632.jpg" alt="slideImage" id="img"> 
             </div>
 
             <div class="formsection">
@@ -68,9 +69,11 @@ $controler->Register();
             <div class="eroor" id="error-message">
 
             </div>
-            <?php if (isset($error_message)) { ?>
-                        <div class="error"><?= $error_message ?></div>
-                    <?php } ?>
+            <?php if (!empty($controler->error_message)): ?>
+                <div class="error"><?= htmlspecialchars($controler->error_message); ?></div>
+                 <?php $controler->error_message = ""; ?>
+                <?php endif; ?>
+
                
                   
                   <div class="btnRow" id="singupDiv">

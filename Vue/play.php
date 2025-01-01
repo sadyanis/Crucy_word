@@ -92,6 +92,15 @@ $gridDimension =  $gridData['dimension']['dimension']-1;
             </div>
         </div>
     </aside>
+
+    <div id="success-message" class="model hidden">
+        <div class="model-content">
+            <h2>Bravo !</h2>
+            <p>Vous avez trouvé la solution !</p>
+            <button onclick="closeModal()">Continuer</button>
+        </div>
+    </div>
+
 </div>
 
 </body>

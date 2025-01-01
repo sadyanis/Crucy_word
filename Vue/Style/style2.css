@@ -363,3 +363,30 @@ aside input[type="text"]{
     height: 80vh;
     padding: 20px;
 }
+
+.model {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+}
+.model-content h2 {
+    color: #4caf50;
+}
+.model-content button {
+    padding: 10px 20px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.model-content button:hover {
+    background: #45a049;
+}

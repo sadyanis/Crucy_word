@@ -1,26 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal');
-    const addGridBtn = document.getElementById('add_grid_btn');
     const closeModal = document.getElementById('close_modal');
     const aside = document.getElementById("side_index");
-
-    addGridBtn.addEventListener('click', () => {
-        try {
-            modal.classList.remove('hidden');
-            aside.classList.add('hidden');
-        } catch (error) {
-            console.error('Error showing modal:', error);
-        }
-    });
-
-    closeModal.addEventListener('click', () => {
-        try {
-            modal.classList.add('hidden');
-            aside.classList.remove('hidden');
-        } catch (error) {
-            console.error('Error hiding modal:', error);
-        }
-    });
 });
 
 function addGridClickListeners() {
@@ -81,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Fonction pour récupérer les grilles
 function fetchGrids(filterMyGrids = false) {
-    console.log(filterMyGrids);
     fetch('../controllers/get_all_grids.php',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -1,5 +1,5 @@
 <nav>
-<h2 class="logo"><a href="mainmenu.php">CrussyWord</a></h2>
+<h2 class="logo"><a href="">CrussiWeb</a></h2>
 <ul>
     <?php
     

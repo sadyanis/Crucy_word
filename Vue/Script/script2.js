@@ -160,7 +160,7 @@ document.getElementById("submit").addEventListener("click", () => {
         const playerGrid = collectPlayerGrid();
         const result = verifyAnswers(playerGrid);
         if (result) {
-            alert('Bravo ! Vous avez résolu la grille');
+            showSuccessMessage();
         } else {
             alert('Certaines réponses sont incorrectes');
         }
@@ -276,3 +276,14 @@ function saveGame() {
         console.error('Error in saveGrid function:', error);
     }
 }
+
+function showSuccessMessage() {
+    const modal = document.getElementById('success-message');
+    modal.classList.remove('hidden');
+}
+
+function closeModal() {
+    const modal = document.getElementById('success-message');
+    modal.classList.add('hidden');
+}
+

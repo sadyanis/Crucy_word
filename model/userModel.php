@@ -4,7 +4,7 @@ require_once __DIR__ . '/../core/Database.php';
 
 class User {
     private $db;
-
+    
     public function __construct() {
         $this->db = (new Database())->connect();
     }
@@ -25,7 +25,7 @@ class User {
             return true;
 
         }catch(PDOException $e){
-            die("Erreur d'incription:".$e->getMessage());
+            return "Erreur d'inscription : " . $e->getMessage();
         }
 
 }

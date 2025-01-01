@@ -1,7 +1,13 @@
 <?php session_start();
 if(isset($_SESSION["role"])){
 $role = $_SESSION["role"];
-};
+if($role == "visitor"){
+    header("Location: ./mainmenuVisitor.php");
+}
+if($role == "admin"){
+    header("Location: ./Admin.php");
+}
+}
 if(isset($_SESSION['gameData'])){
     unset($_SESSION['gameData']);
 }
