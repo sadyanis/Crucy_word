@@ -1,7 +1,7 @@
 <?php session_start(); 
-// if(!isset($_SESSION["user"])){
-//     header("Location: ./LOGIN/login.html");
-// }
+if (!isset($_SESSION["role"])){
+    header("Location: ./LOGIN/login.html");
+ }
 
 $gridData = isset($_SESSION['gridData']) ? $_SESSION['gridData'] : null;
 $gridDimension =  $gridData['dimension']['dimension']-1;

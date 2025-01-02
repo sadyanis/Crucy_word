@@ -1,10 +1,11 @@
-<?php session_start();
+<?php 
+session_start();
 if(isset($_SESSION["role"])){
 $role = $_SESSION["role"];
-};
-// if(!isset($_SESSION["user"])){
-//     header("Location: ./LOGIN/login.html");
-// }
+}else{ 
+$_SESSION["role"] = "visitor";
+}
+
 
 
 require_once __DIR__ . '/../model/gridModel.php';

@@ -30,7 +30,7 @@ function addClickEventToDivs(divs) {
         div.addEventListener("blur", () => {
             try {
                 div.removeAttribute("contenteditable"); // Remove editable attribute
-                div.style.border = "1px solid #ccc;"; // Reset border style
+                div.style.border = "1px solid #ccc"; // Reset border style
             } catch (error) {
                 console.error('Error in blur event:', error);
             }

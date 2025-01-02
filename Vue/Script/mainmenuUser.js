@@ -141,7 +141,7 @@ function createGridListItem(grid) {
         listItem.setAttribute('data-grid-id', grid.gridID);
         listItem.textContent = grid.gridName;
 
-        // Si l'utilisateur est le propriétaire, ajouter un bouton "Modify"
+        // Si l'utilisateur est le propriétaire, ajouter un bouton "delete"
         if (grid.isOwner) {
             const modifyButton = createModifyButton(grid.gridID);
             listItem.appendChild(modifyButton);
@@ -159,7 +159,7 @@ function createModifyButton(gridID) {
         const btn = document.createElement('button');
         btn.textContent = 'delete';
         btn.addEventListener('click', (event) => {
-            event.stopPropagation(); // Empêche le déclenchement d'autres événements sur le <li>
+            event.stopPropagation(); // Empeche le déclenchement d'autres événements sur le <li>
             const confirmation = confirm('Voulez-vous vraiment supprimer cette grille ?');
             if (!confirmation) return;
             // Envoyer une requête au serveur pour supprimer la grille
@@ -172,7 +172,7 @@ function createModifyButton(gridID) {
             }).then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        btn.parentElement.remove(); // Supprimer l'élément <li> parent
+                        btn.parentElement.remove(); // supprimer l'élément <li> parent
                         console.log('Grille supprimée', gridID);
                     } else {
                         alert('Erreur lors de la suppression de la grille');
@@ -189,7 +189,7 @@ function createModifyButton(gridID) {
     }
 }
 
-// Fonction pour récupérer les parties
+// fonction pour récupérer les parties sauvgradées
 
 function fetchGames() {
     fetch('../controllers/get_all_games.php',{
@@ -207,7 +207,7 @@ function fetchGames() {
         })
         .catch(error => console.error('Erreur lors de la récupération des grilles:', error));
 }
-
+// mettre à jour la liste des parties
 function updateGameList(grids) {
     try {
         const gridList = document.getElementById('liste_games');
@@ -232,7 +232,7 @@ function updateGameList(grids) {
         console.error('Error updating grid list:', error);
     }
 }
-
+// Representer chaque partie en tant qu'élément <li>
 function createGameListItem(grid) {
     try {
         const listItem = document.createElement('li');
@@ -240,14 +240,15 @@ function createGameListItem(grid) {
         listItem.textContent = grid.gridName;
         attachClickListenerToLi(listItem);
     
-        // Si l'utilisateur est le propriétaire, ajouter un bouton "Modify"
+        // si l'utilisateur est le propriétaire, ajouter un bouton "Modify"
         return listItem;
     } catch (error) {
         console.error('Error creating grid list item:', error);
     }
 }
 
-// Fonction pour attacher un écouteur d'événements à un élément <li>
+// fonction pour attacher un écouteur d'événements à un élément <li>
+// clic sur un élément <li> pour charger la partie
 
 function attachClickListenerToLi(li) {
     try {

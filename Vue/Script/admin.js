@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-//
+// fonction qui affiche les grilles disponibles
 function fetchGrids(filterMyGrids = false) {
     console.log(filterMyGrids);
     fetch('../controllers/get_all_grids.php',{
@@ -122,7 +122,7 @@ function createModifyButton(gridID) {
         console.error('Error creating modify button:', error);
     }
 }
-
+// fonction qui affiche les utilisateurs inscrits
 function fetchUsers(){
     fetch('../controllers/get_all_users.php',{
         method: 'GET',
@@ -139,7 +139,7 @@ function fetchUsers(){
         })
         .catch(error => console.error('Erreur lors de la récupération des grilles:', error));
 }
-
+// Mettre à jour la liste des utilisateurs
 function updateUserList(grids) {
     try {
         const gridList = document.getElementById('liste_user');
@@ -159,7 +159,7 @@ function updateUserList(grids) {
         console.error('Error updating user list:', error);
     }
 }
-
+// afficher les utilisateurs en liste
 function createUserListItem(grid){
 
     try {
@@ -183,7 +183,7 @@ function createUserListItem(grid){
         console.error('Error creating grid list item:', error);
     }
 }
-
+// creer un bouton de suppression des utilisateurs
 function createDeleteButton(gridID) {
     try {
         const btn = document.createElement('button');
@@ -191,7 +191,7 @@ function createDeleteButton(gridID) {
         btn.addEventListener('click', (event) => {
             const confirmation = confirm('Voulez-vous vraiment supprimer cet Utilisateur ?');
             if (!confirmation) return;
-            // Envoyer une requête au serveur pour supprimer la grille
+            // Envoyer une requête au serveur pour supprimer l'utilisateur 
             fetch('../controllers/deleteUser.php', {
                 method: 'POST',
                 headers: {

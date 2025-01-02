@@ -44,6 +44,8 @@ session_start();
             $password = htmlspecialchars($_POST['password']);
             $user = $this->UserModel->findUser($UserId, $password);
             if($user){
+                // régénère l'ID de session pour sécuriser la session après la connexion
+                session_regenerate_id();
                 if($user['role'] == 'admin'){
                     $_SESSION['user'] = $user['UserID'];
                     $_SESSION['role'] = "admin";
